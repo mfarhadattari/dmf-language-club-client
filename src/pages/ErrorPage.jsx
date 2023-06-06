@@ -1,8 +1,10 @@
+import SetTitle from "../components/setTitle";
+
 const ErrorPage = () => {
   return (
-    <div>
-      <h1>This is Error Page</h1>
-    </div>
+    <main>
+      <SetTitle title="Page Not Found"></SetTitle>
+    </main>
   );
 };
 
