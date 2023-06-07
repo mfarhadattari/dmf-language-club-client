@@ -6,6 +6,7 @@ import LoadingBtn from "../../../components/LoadingBtn";
 import { Link } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import useAuthContext from "../../../hooks/useAuthContext";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
@@ -14,7 +15,6 @@ const Register = () => {
   const { createUser } = useAuthContext();
   const {
     register,
-    watch,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -28,7 +28,7 @@ const Register = () => {
       email,
       password,
       confirmPassword,
-      // photoURL,
+      photoURL,
       // gender,
       // phone,
       // address,
@@ -40,15 +40,17 @@ const Register = () => {
       setPasswordMatched(true);
       createUser(email, password)
         .then(({ user }) => {
-          console.log(user);
-          setLoading(false);
+          updateProfile(user, { displayName: name, photoURL: photoURL }).then(
+            () => {
+              setLoading(false);
+            }
+          );
         })
         .catch((error) => {
           console.error(error.message);
           setLoading(false);
         });
     }
-    console.log(data);
   };
 
   return (
