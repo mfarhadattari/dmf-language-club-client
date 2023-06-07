@@ -3,6 +3,7 @@ import Heading from "../../../components/Heading";
 import useAuthContext from "./../../../hooks/useAuthContext";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import SuccessAlert from "../../../components/Message/SuccessAlert";
+import FirebaseErrorAlert from "../../../components/Message/FirebaseErrorAlert";
 
 const SocialLogin = () => {
   const { socialLoginUser } = useAuthContext();
@@ -16,7 +17,7 @@ const SocialLogin = () => {
         SuccessAlert("Successfully Login!");
       })
       .catch((error) => {
-        console.error(error.message);
+        FirebaseErrorAlert(error.message);
       });
   };
   return (

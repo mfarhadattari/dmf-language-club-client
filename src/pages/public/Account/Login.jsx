@@ -8,6 +8,7 @@ import SocialLogin from "./SocialLogin";
 import { useState } from "react";
 import useAuthContext from "./../../../hooks/useAuthContext";
 import SuccessAlert from "../../../components/Message/SuccessAlert";
+import FirebaseErrorAlert from "../../../components/Message/FirebaseErrorAlert";
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
@@ -30,7 +31,7 @@ const Login = () => {
         event.target.reset();
       })
       .catch((error) => {
-        console.error(error.message);
+        FirebaseErrorAlert(error.message);
         setLoading(false);
       });
   };

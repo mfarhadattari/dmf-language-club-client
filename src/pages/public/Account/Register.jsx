@@ -8,6 +8,7 @@ import SocialLogin from "./SocialLogin";
 import useAuthContext from "../../../hooks/useAuthContext";
 import { updateProfile } from "firebase/auth";
 import SuccessAlert from "../../../components/Message/SuccessAlert";
+import FirebaseErrorAlert from "../../../components/Message/FirebaseErrorAlert";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
@@ -50,7 +51,7 @@ const Register = () => {
           );
         })
         .catch((error) => {
-          console.error(error.message);
+          FirebaseErrorAlert(error.message);
           setLoading(false);
         });
     }

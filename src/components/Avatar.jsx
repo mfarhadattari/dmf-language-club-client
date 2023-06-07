@@ -1,5 +1,6 @@
 import useAuthContext from "../hooks/useAuthContext";
 import ConfirmationAlert from "./Message/ConfirmationAlert";
+import FirebaseErrorAlert from "./Message/FirebaseErrorAlert";
 import SuccessAlert from "./Message/SuccessAlert";
 
 const Avatar = () => {
@@ -13,7 +14,7 @@ const Avatar = () => {
             SuccessAlert("Logout Successfully!");
           })
           .catch((error) => {
-            console.error(error);
+            FirebaseErrorAlert(error.message);
           });
       }
     });
