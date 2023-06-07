@@ -44,12 +44,12 @@ const Login = () => {
               <h1 className="text-center mt-5 text-2xl font-bold">
                 Please Login
               </h1>
-              <img src={loginImg} className="w-40 mx-auto" />
-              <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
+              <img src={loginImg} className="w-36 mx-auto" />
+              <form
+                className="card-body pb-0"
+                onSubmit={handleSubmit(onSubmit)}
+              >
                 <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Email</span>
-                  </label>
                   <input
                     type="email"
                     placeholder="Your Email"
@@ -62,9 +62,6 @@ const Login = () => {
                   )}
                 </div>
                 <div className="form-control">
-                  <label className="label">
-                    <span className="label-text">Password</span>
-                  </label>
                   <div className="relative">
                     <input
                       type="password"
@@ -89,13 +86,13 @@ const Login = () => {
                     </p>
                   </div>
                 </div>
-                <div className="form-control mt-6">
+                <div className="form-control mt-2">
                   <LoadingBtn loading={loading} type="submit">
                     Login
                   </LoadingBtn>
                 </div>
               </form>
-              <p className="text-center mb-5 m-0">
+              <p className="text-center my-5 flex flex-wrap px-5">
                 {"Don't have any account?"}
                 <Link to="/register" className="font-bold ms-2">
                   Create Account
