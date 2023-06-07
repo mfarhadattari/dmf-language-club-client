@@ -1,4 +1,3 @@
-import { useRef, useState } from "react";
 import loginImg from "../../../assets/images/user.gif";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import LoadingBtn from "../../../components/LoadingBtn";
@@ -6,10 +5,10 @@ import { useForm } from "react-hook-form";
 import ErrorMessage from "../../../components/Message/ErrorMessage";
 import { Link } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
+import { useState } from "react";
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
-  const passwordRef = useRef();
   const {
     register,
     handleSubmit,
@@ -21,18 +20,6 @@ const Login = () => {
   const onSubmit = (data) => {
     setLoading(true);
     console.log(data);
-  };
-
-  /* ----------------------------------------------
-  ! ---------- Password Show Handler ---------------*/
-
-  const passwordShowHandler = () => {
-    setPasswordShow(!passwordShow);
-    if (passwordShow === false) {
-      passwordRef.current.type = "text";
-    } else {
-      passwordRef.current.type = "password";
-    }
   };
 
   return (
@@ -64,11 +51,10 @@ const Login = () => {
                 <div className="form-control">
                   <div className="relative">
                     <input
-                      type="password"
+                      type={passwordShow ? "text" : "password"}
                       placeholder="Your Password"
                       name="password"
                       className="input input-bordered w-full  border-blue-600 focus:outline-blue-600"
-                      ref={passwordRef}
                       {...register("password", { required: true })}
                     />
                     {errors.password && (
@@ -76,7 +62,7 @@ const Login = () => {
                     )}
                     <p
                       className="absolute top-4 right-4 text-xl"
-                      onClick={passwordShowHandler}
+                      onClick={() => setPasswordShow(!passwordShow)}
                     >
                       {passwordShow ? (
                         <FaEyeSlash></FaEyeSlash>

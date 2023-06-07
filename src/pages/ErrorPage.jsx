@@ -6,7 +6,7 @@ const ErrorPage = () => {
   return (
     <main>
       <SetTitle title="Page Not Found"></SetTitle>
-      <section className="container">
+      <section className="container mx-auto">
         <div className="flex min-h-screen items-center justify-center">
           <div className="w-full md:w-2/3 lg:w-1/2 mx-auto text-center">
             <img src={errorIMG} alt="" className="w-full mx-auto" />
