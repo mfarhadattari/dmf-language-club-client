@@ -78,7 +78,7 @@ const Login = () => {
                   </LoadingBtn>
                 </div>
               </form>
-              <p className="text-center my-5 flex flex-wrap px-5">
+              <p className="text-center my-5 flex flex-wrap justify-center px-5">
                 {"Don't have any account?"}
                 <Link to="/register" className="font-bold ms-2">
                   Create Account

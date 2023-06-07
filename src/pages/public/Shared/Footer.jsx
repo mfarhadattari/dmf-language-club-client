@@ -44,18 +44,18 @@ const Footer = () => {
             <h1 className="text-2xl mb-5">FOLLOW US</h1>
           </div>
           <div className="flex gap-5">
-            <p className="btn btn-circle btn-outline text-blue-600">
+            <a className="btn btn-circle btn-outline text-blue-600">
               <FaFacebookF className="text-xl"></FaFacebookF>
-            </p>
-            <p className="btn btn-circle btn-outline text-blue-600">
+            </a>
+            <a className="btn btn-circle btn-outline text-blue-600">
               <FaInstagram className="text-2xl text-pink-700"></FaInstagram>
-            </p>
-            <p className="btn btn-circle btn-outline text-blue-600">
+            </a>
+            <a className="btn btn-circle btn-outline text-blue-600">
               <FaTwitter className="text-2xl"></FaTwitter>
-            </p>
-            <p className="btn btn-circle btn-outline text-blue-600">
+            </a>
+            <a className="btn btn-circle btn-outline text-blue-600">
               <FaLinkedin className="text-2xl"></FaLinkedin>
-            </p>
+            </a>
           </div>
         </div>
       </div>
