@@ -1,14 +1,25 @@
 import Heading from "../../../components/Heading";
 import { FaBars } from "react-icons/fa";
 import NavigationLink from "../../../components/NavigationLink";
+import useAuthContext from "../../../hooks/useAuthContext";
+import Avatar from "../../../components/Avatar";
 
 const NavigationBar = () => {
+  const { authUser } = useAuthContext();
+
   const navItems = (
     <>
       <NavigationLink to="/">Home</NavigationLink>
       <NavigationLink to="/instructor">Instructor</NavigationLink>
       <NavigationLink to="/classes">Classes</NavigationLink>
-      <NavigationLink to="/login">Login</NavigationLink>
+      {authUser ? (
+        <>
+          <NavigationLink to="/dashboard">Dashboard</NavigationLink>
+          <Avatar></Avatar>
+        </>
+      ) : (
+        <NavigationLink to="/login">Login</NavigationLink>
+      )}
     </>
   );
   return (
@@ -27,8 +38,10 @@ const NavigationBar = () => {
         </div>
         <Heading></Heading>
       </div>
-      <div className="navbar-end w-full hidden md:flex">
-        <ul className="menu menu-horizontal px-1 gap-2">{navItems}</ul>
+      <div className="navbar-end w-full hidden md:flex ">
+        <ul className="menu menu-horizontal px-1 gap-2 items-center">
+          {navItems}
+        </ul>
       </div>
     </nav>
   );
