@@ -4,10 +4,14 @@ import NavigationBar from "../pages/public/Shared/NavigationBar";
 
 const Main = () => {
   return (
-    <div>
-      <NavigationBar></NavigationBar>
-      <Outlet></Outlet>
-      <Footer></Footer>
+    <div className="min-h-screen max-w-7xl mx-auto flex flex-col justify-between">
+      <div>
+        <NavigationBar></NavigationBar>
+        <Outlet></Outlet>
+      </div>
+      <div>
+        <Footer></Footer>
+      </div>
     </div>
   );
 };

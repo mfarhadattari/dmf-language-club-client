@@ -12,7 +12,7 @@ const NavigationBar = () => {
     </>
   );
   return (
-    <div className="navbar container mx-auto p-5">
+    <nav className="navbar container mx-auto sticky top-0 z-50 bg-white">
       <div className="navbar-start w-full">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost md:hidden">
@@ -30,7 +30,7 @@ const NavigationBar = () => {
       <div className="navbar-end w-full hidden md:flex">
         <ul className="menu menu-horizontal px-1 gap-2">{navItems}</ul>
       </div>
-    </div>
+    </nav>
   );
 };
 
