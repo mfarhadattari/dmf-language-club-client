@@ -1,4 +1,5 @@
 import useAuthContext from "../hooks/useAuthContext";
+import SuccessAlert from "./Message/SuccessAlert";
 
 const Avatar = () => {
   const { authUser, logoutUser } = useAuthContext();
@@ -6,7 +7,7 @@ const Avatar = () => {
   const handelLogOut = () => {
     logoutUser()
       .then(() => {
-        console.log("logOut Successfully");
+        SuccessAlert("Logout Successfully!");
       })
       .catch((error) => {
         console.error(error);

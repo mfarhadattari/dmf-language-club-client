@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import { useState } from "react";
 import useAuthContext from "./../../../hooks/useAuthContext";
+import SuccessAlert from "../../../components/Message/SuccessAlert";
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
@@ -24,6 +25,7 @@ const Login = () => {
     loginUser(data.email, data.password)
       .then(({ user }) => {
         console.log(user);
+        SuccessAlert("Successfully Login!");
         setLoading(false);
         event.target.reset();
       })

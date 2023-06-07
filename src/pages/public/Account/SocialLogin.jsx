@@ -2,6 +2,7 @@ import { FaGithub, FaGoogle } from "react-icons/fa";
 import Heading from "../../../components/Heading";
 import useAuthContext from "./../../../hooks/useAuthContext";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
+import SuccessAlert from "../../../components/Message/SuccessAlert";
 
 const SocialLogin = () => {
   const { socialLoginUser } = useAuthContext();
@@ -12,6 +13,7 @@ const SocialLogin = () => {
     socialLoginUser(provider)
       .then(({ user }) => {
         console.log(user);
+        SuccessAlert("Successfully Login!");
       })
       .catch((error) => {
         console.error(error.message);

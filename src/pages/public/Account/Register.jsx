@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import useAuthContext from "../../../hooks/useAuthContext";
 import { updateProfile } from "firebase/auth";
+import SuccessAlert from "../../../components/Message/SuccessAlert";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
@@ -43,6 +44,7 @@ const Register = () => {
           updateProfile(user, { displayName: name, photoURL: photoURL }).then(
             () => {
               setLoading(false);
+              SuccessAlert("Successfully Register!");
               event.target.reset();
             }
           );
