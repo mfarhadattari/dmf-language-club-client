@@ -4,6 +4,7 @@ import {
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
 } from "firebase/auth";
 import app from "./../Firebase/firebase.config";
@@ -32,6 +33,12 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  //   !---------------- Social Login ----------------! //
+  const socialLoginUser = (provider) => {
+    setAuthLoading(true);
+    return signInWithPopup(auth, provider);
+  };
+
   // !----------- GET Logged User ---------------! //
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -57,6 +64,7 @@ const AuthProvider = ({ children }) => {
     createUser,
     loginUser,
     logoutUser,
+    socialLoginUser,
   };
 
   return (
