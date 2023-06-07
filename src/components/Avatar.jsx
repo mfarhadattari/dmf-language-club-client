@@ -1,17 +1,22 @@
 import useAuthContext from "../hooks/useAuthContext";
+import ConfirmationAlert from "./Message/ConfirmationAlert";
 import SuccessAlert from "./Message/SuccessAlert";
 
 const Avatar = () => {
   const { authUser, logoutUser } = useAuthContext();
 
   const handelLogOut = () => {
-    logoutUser()
-      .then(() => {
-        SuccessAlert("Logout Successfully!");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    ConfirmationAlert("Want to logout?").then((res) => {
+      if (res.isConfirmed) {
+        logoutUser()
+          .then(() => {
+            SuccessAlert("Logout Successfully!");
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    });
   };
 
   return (
