@@ -1,10 +1,23 @@
 import useAuthContext from "../hooks/useAuthContext";
 
 const Avatar = () => {
-  const { authUser } = useAuthContext();
+  const { authUser, logoutUser } = useAuthContext();
+
+  const handelLogOut = () => {
+    logoutUser()
+      .then(() => {
+        console.log("logOut Successfully");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
     <div className="flex items-center gap-3">
-      <button className="btn btn-sm">Logout</button>
+      <button className="btn btn-sm" onClick={handelLogOut}>
+        Logout
+      </button>
       <div className="avatar">
         <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
           {
