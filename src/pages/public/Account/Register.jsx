@@ -21,7 +21,7 @@ const Register = () => {
 
   /* ----------------------------------------------------------
   ! ------------------ From Submit Handler ------------------- */
-  const onSubmit = (data) => {
+  const onSubmit = (data, event) => {
     setLoading(true);
     const {
       name,
@@ -43,6 +43,7 @@ const Register = () => {
           updateProfile(user, { displayName: name, photoURL: photoURL }).then(
             () => {
               setLoading(false);
+              event.target.reset();
             }
           );
         })

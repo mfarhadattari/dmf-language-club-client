@@ -6,9 +6,11 @@ import ErrorMessage from "../../../components/Message/ErrorMessage";
 import { Link } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import { useState } from "react";
+import useAuthContext from "./../../../hooks/useAuthContext";
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
+  const { loginUser } = useAuthContext();
   const {
     register,
     handleSubmit,
@@ -17,9 +19,18 @@ const Login = () => {
 
   /* ----------------------------------------------------------
   ! ------------------ From Submit Handler ------------------- */
-  const onSubmit = (data) => {
+  const onSubmit = (data, event) => {
     setLoading(true);
-    console.log(data);
+    loginUser(data.email, data.password)
+      .then(({ user }) => {
+        console.log(user);
+        setLoading(false);
+        event.target.reset();
+      })
+      .catch((error) => {
+        console.error(error.message);
+        setLoading(false);
+      });
   };
 
   return (
