@@ -5,12 +5,16 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import LoadingBtn from "../../../components/LoadingBtn";
 import { Link } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
+import useAuthContext from "../../../hooks/useAuthContext";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
+  const [passwordMatched, setPasswordMatched] = useState(null);
+  const { createUser } = useAuthContext();
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -19,6 +23,31 @@ const Register = () => {
   ! ------------------ From Submit Handler ------------------- */
   const onSubmit = (data) => {
     setLoading(true);
+    const {
+      name,
+      email,
+      password,
+      confirmPassword,
+      // photoURL,
+      // gender,
+      // phone,
+      // address,
+    } = data;
+    if (password !== confirmPassword) {
+      setPasswordMatched(false);
+      setLoading(false);
+    } else {
+      setPasswordMatched(true);
+      createUser(email, password)
+        .then(({ user }) => {
+          console.log(user);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error(error.message);
+          setLoading(false);
+        });
+    }
     console.log(data);
   };
 
@@ -106,6 +135,9 @@ const Register = () => {
                   />
                   {errors.confirmPassword?.type == "required" && (
                     <ErrorMessage message="Password is required"></ErrorMessage>
+                  )}
+                  {passwordMatched === false && (
+                    <ErrorMessage message="Password is not matched"></ErrorMessage>
                   )}
                 </div>
               </div>

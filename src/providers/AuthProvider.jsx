@@ -12,12 +12,14 @@ const AuthProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
 
+  console.log(authUser)
+
   // !------------ CREATE USER -------------------! //
   const createUser = (email, password) => {
     setAuthLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
-  
+
   // !----------- GET Logged User ---------------! //
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
