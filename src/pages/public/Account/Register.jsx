@@ -9,12 +9,14 @@ import useAuthContext from "../../../hooks/useAuthContext";
 import { updateProfile } from "firebase/auth";
 import SuccessAlert from "../../../components/Message/SuccessAlert";
 import FirebaseErrorAlert from "../../../components/Message/FirebaseErrorAlert";
+import useAxios from "./../../../hooks/useAxios";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
   const [passwordMatched, setPasswordMatched] = useState(null);
   const { createUser } = useAuthContext();
+  const { axiosReq } = useAxios();
   const {
     register,
     handleSubmit,
@@ -24,17 +26,17 @@ const Register = () => {
   /* ----------------------------------------------------------
   ! ------------------ From Submit Handler ------------------- */
   const onSubmit = (data, event) => {
-    setLoading(true);
     const {
-      name,
-      email,
       password,
       confirmPassword,
+      email,
+      name,
       photoURL,
-      // gender,
-      // phone,
-      // address,
+      gender,
+      address,
+      phone,
     } = data;
+    setLoading(true);
     if (password !== confirmPassword) {
       setPasswordMatched(false);
       setLoading(false);
@@ -42,13 +44,28 @@ const Register = () => {
       setPasswordMatched(true);
       createUser(email, password)
         .then(({ user }) => {
-          updateProfile(user, { displayName: name, photoURL: photoURL }).then(
-            () => {
-              setLoading(false);
-              SuccessAlert("Successfully Register!");
-              event.target.reset();
-            }
-          );
+          updateProfile(user, {
+            displayName: name,
+            photoURL: photoURL,
+          }).then(() => {
+            axiosReq
+              .post("/user/create-user", {
+                email,
+                name,
+                photoURL,
+                role: "student",
+                gender,
+                address,
+                phone,
+              })
+              .then(({ data }) => {
+                if (data.insertedId || data.isExist) {
+                  setLoading(false);
+                  SuccessAlert("Successfully Register!");
+                  event.target.reset();
+                }
+              });
+          });
         })
         .catch((error) => {
           FirebaseErrorAlert(error.message);
@@ -168,11 +185,8 @@ const Register = () => {
                     placeholder="Your Mobile No"
                     name="phone"
                     className="input input-bordered w-full border-blue-600 focus:outline-blue-600"
-                    {...register("phone", { required: true })}
+                    {...register("phone")}
                   />
-                  {errors.phone?.type == "required" && (
-                    <ErrorMessage message="Photo URL is required"></ErrorMessage>
-                  )}
                 </div>
                 <div className="form-control w-full">
                   <select
@@ -182,9 +196,6 @@ const Register = () => {
                     <option value="female">Female</option>
                     <option value="male">Male</option>
                   </select>
-                  {errors.gender?.type == "required" && (
-                    <ErrorMessage message="Photo URL is required"></ErrorMessage>
-                  )}
                 </div>
               </div>
               <div className="form-control w-full">
@@ -193,11 +204,8 @@ const Register = () => {
                   rows={3}
                   name="address"
                   className="border rounded-lg p-3 w-full border-blue-600 focus:outline-blue-600"
-                  {...register("address", { required: true })}
+                  {...register("address")}
                 ></textarea>
-                {errors.address?.type == "required" && (
-                  <ErrorMessage message="Photo URL is required"></ErrorMessage>
-                )}
               </div>
 
               <div className="form-control mt-2">
