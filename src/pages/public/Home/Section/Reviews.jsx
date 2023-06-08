@@ -18,7 +18,6 @@ const Reviews = () => {
       setReviews(data);
     });
   }, [axiosReq]);
-  console.log(reviews);
   return (
     <section className="py-10">
       <Cover bgImage={"bg-review-bg"} heading="Testimonials"></Cover>

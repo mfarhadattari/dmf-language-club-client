@@ -1,5 +1,6 @@
 import SetTitle from "../../../components/setTitle";
 import Banner from "./Section/Banner";
+import Contract from "./Section/Contract";
 import PopularClasses from "./Section/PopularClasses";
 import PopularInstructor from "./Section/PopularInstructor";
 import Reviews from "./Section/Reviews";
@@ -12,6 +13,7 @@ const Home = () => {
       <PopularClasses></PopularClasses>
       <PopularInstructor></PopularInstructor>
       <Reviews></Reviews>
+      <Contract></Contract>
     </main>
   );
 };

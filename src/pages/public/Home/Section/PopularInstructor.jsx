@@ -11,7 +11,6 @@ const PopularInstructor = () => {
   useEffect(() => {
     axiosReq.get("/popular-instructor").then(({ data }) => {
       setPopularInstructors(data);
-      console.log(data);
     });
   }, [axiosReq]);
 

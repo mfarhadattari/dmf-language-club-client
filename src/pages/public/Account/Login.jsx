@@ -24,8 +24,7 @@ const Login = () => {
   const onSubmit = (data, event) => {
     setLoading(true);
     loginUser(data.email, data.password)
-      .then(({ user }) => {
-        console.log(user);
+      .then(() => {
         SuccessAlert("Successfully Login!");
         setLoading(false);
         event.target.reset();
