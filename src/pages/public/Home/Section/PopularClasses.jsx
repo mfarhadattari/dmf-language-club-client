@@ -15,13 +15,12 @@ const PopularClasses = () => {
 
   return (
     <section className="my-10">
-      <Cover heading="Popular Classes"></Cover>
+      <Cover heading="Popular Classes" bgImage={"bg-popular-class-bg"}></Cover>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-5">
         {popularClasses.map((item) => (
           <CourseCard key={item._id} item={item}></CourseCard>
         ))}
       </div>
-      
     </section>
   );
 };

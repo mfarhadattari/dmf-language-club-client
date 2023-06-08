@@ -8,8 +8,9 @@ export default {
         "bebas-neue": ["Bebas Neue", "sans-serif"],
       },
       backgroundImage: {
-        "popular-bg" : `url('./src/assets/images/home/popular.jpg')`
-      }
+        "popular-class-bg": `url('./src/assets/images/home/popular-class.jpg')`,
+        "popular-instructor-bg": `url('./src/assets/images/home/popular-instructor.jpg')`,
+      },
     },
   },
   plugins: [require("daisyui")],
