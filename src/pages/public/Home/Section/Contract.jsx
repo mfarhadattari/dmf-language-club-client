@@ -1,16 +1,31 @@
-import { useForm } from "react-hook-form";
+import emailjs from "@emailjs/browser";
+import { useRef } from 'react';
+import SuccessAlert from "./../../../../components/Message/SuccessAlert";
 import LoadingBtn from "./../../../../components/Button/LoadingBtn";
-import ErrorMessage from "../../../../components/Message/ErrorMessage";
 import contractIMG from "../../../../assets/images/home/contract.svg";
-const Contract = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+import { useState } from "react";
 
-  const sendEmail = (data, event) => {
-    console.log(data);
+const Contract = () => {
+  const [loading, setLoading] = useState(false);
+  const form = useRef()
+
+  const sendEmail = (event) => {
+    event.preventDefault();
+    setLoading(true);
+    emailjs
+      .sendForm(
+        import.meta.env.VITE_EMAILSERVICEID,
+        import.meta.env.VITE_EMAILTEMPLETEID,
+        form.current,
+        import.meta.env.VITE_EMAILJSPUBLIC
+      )
+      .then((result) => {
+        if (result.text === "OK") {
+          SuccessAlert("Message Send Successfully!");
+          event.target.reset();
+          setLoading(false);
+        }
+      });
   };
 
   return (
@@ -21,45 +36,36 @@ const Contract = () => {
         </div>
         <div className="card w-full shadow-2xl bg-base-100 p-5">
           <h1 className="text-center text-3xl my-5">Contract Form</h1>
-          <form onSubmit={handleSubmit(sendEmail)} className="card-body">
+          <form onSubmit={sendEmail} ref={form} className="card-body">
             <div className="form-control">
               <input
                 type="text"
                 placeholder="Your Email"
                 name="user_name"
+                required
                 className="input input-bordered w-full border-blue-600 focus:outline-blue-600"
-                {...register("user_name", { required: true })}
               />
-              {errors.user_name && (
-                <ErrorMessage message="Name is required"></ErrorMessage>
-              )}
             </div>
             <div className="form-control">
               <input
                 type="email"
                 placeholder="Your Email"
                 name="user_email"
+                required
                 className="input input-bordered w-full border-blue-600 focus:outline-blue-600"
-                {...register("user_email", { required: true })}
               />
-              {errors.user_email && (
-                <ErrorMessage message="Email is required"></ErrorMessage>
-              )}
             </div>
             <div className="form-control">
               <textarea
                 name="message"
                 rows={4}
                 placeholder="Write Message"
-                {...register("message", { required: true })}
+                required
                 className="border rounded-lg p-3 w-full border-blue-600 focus:outline-blue-600"
               />
-              {errors.message && (
-                <ErrorMessage message="Message is required"></ErrorMessage>
-              )}
             </div>
             <div className="form-control">
-              <LoadingBtn>Send Message</LoadingBtn>
+              <LoadingBtn loading={loading}>Send Message</LoadingBtn>
             </div>
           </form>
         </div>
