@@ -7,6 +7,9 @@ export default {
         "space-grotesk": ["Space Grotesk", "sans-serif"],
         "bebas-neue": ["Bebas Neue", "sans-serif"],
       },
+      backgroundImage: {
+        "popular-bg" : `url('./src/assets/images/home/popular.jpg')`
+      }
     },
   },
   plugins: [require("daisyui")],
