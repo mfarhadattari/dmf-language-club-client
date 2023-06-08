@@ -1,5 +1,5 @@
 import { FaChalkboardTeacher } from "react-icons/fa";
-import PrimaryBtn from "./Button/PrimaryBtn";
+import PrimaryBtn from "../Button/PrimaryBtn";
 
 // TODO: Add Image
 const img =

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxios from "./../../../../hooks/useAxios";
-import CourseCard from "../../../../components/CourseCard";
+import CourseCard from "../../../../components/Cards/CourseCard";
 import Cover from "../../../../components/Cover";
 
 const PopularClasses = () => {
