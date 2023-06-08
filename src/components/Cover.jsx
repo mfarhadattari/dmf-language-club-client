@@ -1,5 +1,4 @@
 const Cover = ({ bgImage, heading }) => {
-  console.log(bgImage);
   return (
     <div className={`hero h-[400px] ${bgImage} bg-fixed my-10`}>
       <div className="hero-overlay bg-opacity-70"></div>
