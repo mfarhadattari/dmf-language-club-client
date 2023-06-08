@@ -1,11 +1,12 @@
 import SetTitle from "../../../components/setTitle";
+import Banner from "./Section/Banner";
 
 const Home = () => {
   return (
-    <div>
+    <main>
       <SetTitle title="DMF Language Club"></SetTitle>
-      <h1>This is home page</h1>
-    </div>
+      <Banner></Banner>
+    </main>
   );
 };
 
