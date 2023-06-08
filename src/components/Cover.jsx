@@ -5,7 +5,7 @@ const Cover = ({ bgImage, heading }) => {
       <div className="hero-content text-center text-neutral-content">
         <div className="w-fit mx-auto">
           <div className="my-5 text-center">
-            <h1 className="text-5xl uppercase w-fit mx-auto border-b-4 p-3 border-blue-600">
+            <h1 className="text-3xl md:text-5xl uppercase w-fit mx-auto border-b-4 p-3 border-blue-600">
               {heading}
             </h1>
           </div>
