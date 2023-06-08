@@ -1,6 +1,6 @@
 import loginImg from "../../../assets/images/user.gif";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import LoadingBtn from "../../../components/LoadingBtn";
+import LoadingBtn from "../../../components/Button/LoadingBtn";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../../components/Message/ErrorMessage";
 import { Link } from "react-router-dom";
