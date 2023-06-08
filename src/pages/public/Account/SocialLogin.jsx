@@ -4,17 +4,29 @@ import useAuthContext from "./../../../hooks/useAuthContext";
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import SuccessAlert from "../../../components/Message/SuccessAlert";
 import FirebaseErrorAlert from "../../../components/Message/FirebaseErrorAlert";
+import useAxios from "../../../hooks/useAxios";
 
 const SocialLogin = () => {
   const { socialLoginUser } = useAuthContext();
+  const { axiosReq } = useAxios();
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
 
   const handelSocialLogin = (provider) => {
     socialLoginUser(provider)
       .then(({ user }) => {
-        console.log(user);
-        SuccessAlert("Successfully Login!");
+        axiosReq
+          .post("/user/create-user", {
+            email: user.email,
+            name: user.displayName,
+            photoURL: user.photoURL,
+            role: "student",
+          })
+          .then(({ data }) => {
+            if (data.insertedId || data.isExist) {
+              SuccessAlert("Successfully Login!");
+            }
+          });
       })
       .catch((error) => {
         FirebaseErrorAlert(error.message);
