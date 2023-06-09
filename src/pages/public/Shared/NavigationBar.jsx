@@ -10,7 +10,7 @@ const NavigationBar = () => {
   const navItems = (
     <>
       <NavigationLink to="/">Home</NavigationLink>
-      <NavigationLink to="/instructor">Instructor</NavigationLink>
+      <NavigationLink to="/instructors">Instructor</NavigationLink>
       <NavigationLink to="/classes">Classes</NavigationLink>
       {authUser ? (
         <>

@@ -3,6 +3,7 @@ import useAxios from "./../../../../hooks/useAxios";
 import CourseCard from "../../../../components/Cards/CourseCard";
 import Cover from "../../../../components/Cover";
 import Loaders from "./../../../../components/Loaders";
+import SecondaryBtn from "../../../../components/Button/SecondaryBtn";
 
 const PopularClasses = () => {
   const { axiosReq } = useAxios();
@@ -19,14 +20,22 @@ const PopularClasses = () => {
 
   return (
     <section className="my-10">
-      <Cover heading="Popular Classes" bgImage="bg-[url('https://i.ibb.co/CVcZCjF/popular-class.jpg')]"></Cover>
+      <Cover
+        heading="Popular Classes"
+        bgImage="bg-[url('https://i.ibb.co/CVcZCjF/popular-class.jpg')]"
+      ></Cover>
       {loading ? (
         <Loaders></Loaders>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-5">
-          {popularClasses.map((item) => (
-            <CourseCard key={item._id} item={item}></CourseCard>
-          ))}
+        <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-5">
+            {popularClasses.map((item) => (
+              <CourseCard key={item._id} item={item}></CourseCard>
+            ))}
+          </div>
+          <div className="w-2/5 mx-auto">
+            <SecondaryBtn>Explore More</SecondaryBtn>
+          </div>
         </div>
       )}
     </section>

@@ -4,6 +4,7 @@ import useAxios from "./../../../../hooks/useAxios";
 import { useState } from "react";
 import InstructorCard from "../../../../components/Cards/InstructorCard";
 import Loaders from "./../../../../components/Loaders";
+import PrimaryBtn from "../../../../components/Button/PrimaryBtn";
 
 const PopularInstructor = () => {
   const { axiosReq } = useAxios();
@@ -27,13 +28,18 @@ const PopularInstructor = () => {
       {loading ? (
         <Loaders></Loaders>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-5">
-          {popularInstructors.map((instructor) => (
-            <InstructorCard
-              key={instructor._id}
-              instructor={instructor}
-            ></InstructorCard>
-          ))}
+        <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-5">
+            {popularInstructors.map((instructor) => (
+              <InstructorCard
+                key={instructor._id}
+                instructor={instructor}
+              ></InstructorCard>
+            ))}
+          </div>
+          <div className="w-2/5 mx-auto">
+            <PrimaryBtn>Explore More</PrimaryBtn>
+          </div>
         </div>
       )}
     </section>
