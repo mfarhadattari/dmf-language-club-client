@@ -14,7 +14,7 @@ const PopularInstructor = () => {
 
   useEffect(() => {
     setLoading(true);
-    axiosReq.get("/popular-instructor").then(({ data }) => {
+    axiosReq.get("/popular-instructors").then(({ data }) => {
       setPopularInstructors(data);
       setLoading(false);
     });

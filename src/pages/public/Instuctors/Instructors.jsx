@@ -12,7 +12,7 @@ const Instructors = () => {
 
   useEffect(() => {
     setLoading(true);
-    axiosReq.get("/all-instructor").then(({ data }) => {
+    axiosReq.get("/all-instructors").then(({ data }) => {
       setInstructors(data);
       setLoading(false);
     });
