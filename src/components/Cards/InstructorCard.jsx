@@ -14,6 +14,9 @@ const InstructorCard = ({ instructor }) => {
         <h2 className="card-title">{instructor.name}</h2>
 
         <p className="text-lg">
+          {instructor.email}
+        </p>
+        <p className="text-lg">
           {instructor?.totalClass
             ? `Total Class:${instructor.totalClass} `
             : ""}
