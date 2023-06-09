@@ -3,6 +3,7 @@ import Cover from "./../../../components/Cover";
 import useAxios from "./../../../hooks/useAxios";
 import { useEffect } from "react";
 import Loaders from "./../../../components/Loaders";
+import CourseCard from "./../../../components/Cards/CourseCard";
 const Classes = () => {
   const { axiosReq } = useAxios();
   const [allClasses, setAllClasses] = useState([]);
@@ -23,7 +24,15 @@ const Classes = () => {
         bgImage="bg-[url('https://i.ibb.co/7GkCnvk/webinar-concept-illustration-114360-4764.jpg')]"
       ></Cover>
       <section>
-        {loading ? <Loaders></Loaders> : <div>{allClasses.length}</div>}
+        {loading ? (
+          <Loaders></Loaders>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-5">
+            {allClasses.map((item) => (
+              <CourseCard key={item._id} item={item}></CourseCard>
+            ))}
+          </div>
+        )}
       </section>
     </main>
   );
