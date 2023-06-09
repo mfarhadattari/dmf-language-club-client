@@ -22,7 +22,7 @@ const PopularInstructor = () => {
     <section className="my-10">
       <Cover
         heading="Popular Instructor"
-        bgImage={"bg-popular-instructor-bg"}
+        bgImage="bg-[url('https://i.ibb.co/LSBsbqw/popular-instructor.jpg')]"
       ></Cover>
       {loading ? (
         <Loaders></Loaders>

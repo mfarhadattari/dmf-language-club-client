@@ -7,11 +7,6 @@ export default {
         "space-grotesk": ["Space Grotesk", "sans-serif"],
         "bebas-neue": ["Bebas Neue", "sans-serif"],
       },
-      backgroundImage: {
-        "popular-class-bg": `url('./src/assets/images/home/popular-class.jpg')`,
-        "popular-instructor-bg": `url('./src/assets/images/home/popular-instructor.jpg')`,
-        "review-bg": `url('./src/assets/images/home/reviews.jpg')`,
-      },
     },
   },
   plugins: [require("daisyui")],

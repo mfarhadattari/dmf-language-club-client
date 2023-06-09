@@ -25,7 +25,10 @@ const Reviews = () => {
   }, [axiosReq]);
   return (
     <section className="py-10">
-      <Cover bgImage={"bg-review-bg"} heading="Testimonials"></Cover>
+      <Cover
+        bgImage="bg-[url('https://i.ibb.co/j8gz8FC/reviews.jpg')]"
+        heading="Testimonials"
+      ></Cover>
       {loading ? (
         <Loaders></Loaders>
       ) : (

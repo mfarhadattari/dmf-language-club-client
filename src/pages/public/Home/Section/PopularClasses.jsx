@@ -19,7 +19,7 @@ const PopularClasses = () => {
 
   return (
     <section className="my-10">
-      <Cover heading="Popular Classes" bgImage={"bg-popular-class-bg"}></Cover>
+      <Cover heading="Popular Classes" bgImage="bg-[url('https://i.ibb.co/CVcZCjF/popular-class.jpg')]"></Cover>
       {loading ? (
         <Loaders></Loaders>
       ) : (
