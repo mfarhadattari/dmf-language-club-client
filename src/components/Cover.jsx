@@ -1,6 +1,6 @@
 const Cover = ({ bgImage, heading }) => {
   return (
-    <div className={`hero h-[400px] ${bgImage} bg-fixed my-10`}>
+    <div className={`hero h-[500px] ${bgImage} bg-fixed my-10`}>
       <div className="hero-overlay bg-opacity-70"></div>
       <div className="hero-content text-center text-neutral-content">
         <div className="w-fit mx-auto">

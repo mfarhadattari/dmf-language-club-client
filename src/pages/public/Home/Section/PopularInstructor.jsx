@@ -5,6 +5,7 @@ import { useState } from "react";
 import InstructorCard from "../../../../components/Cards/InstructorCard";
 import Loaders from "./../../../../components/Loaders";
 import PrimaryBtn from "../../../../components/Button/PrimaryBtn";
+import { Link } from "react-router-dom";
 
 const PopularInstructor = () => {
   const { axiosReq } = useAxios();
@@ -38,7 +39,9 @@ const PopularInstructor = () => {
             ))}
           </div>
           <div className="w-2/5 mx-auto">
-            <PrimaryBtn>Explore More</PrimaryBtn>
+            <Link to="/instructors">
+              <PrimaryBtn>See All Instructors</PrimaryBtn>
+            </Link>
           </div>
         </div>
       )}

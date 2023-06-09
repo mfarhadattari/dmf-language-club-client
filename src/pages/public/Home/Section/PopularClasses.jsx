@@ -4,6 +4,7 @@ import CourseCard from "../../../../components/Cards/CourseCard";
 import Cover from "../../../../components/Cover";
 import Loaders from "./../../../../components/Loaders";
 import SecondaryBtn from "../../../../components/Button/SecondaryBtn";
+import { Link } from "react-router-dom";
 
 const PopularClasses = () => {
   const { axiosReq } = useAxios();
@@ -34,7 +35,9 @@ const PopularClasses = () => {
             ))}
           </div>
           <div className="w-2/5 mx-auto">
-            <SecondaryBtn>Explore More</SecondaryBtn>
+            <Link to="/classes">
+              <SecondaryBtn>See All Classes</SecondaryBtn>
+            </Link>
           </div>
         </div>
       )}
