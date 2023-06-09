@@ -8,6 +8,7 @@ import {
   signOut,
 } from "firebase/auth";
 import app from "./../Firebase/firebase.config";
+import useAxios from "../hooks/useAxios";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -15,6 +16,7 @@ const auth = getAuth(app);
 const AuthProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
+  const { axiosReq } = useAxios();
 
   // !------------ CREATE USER -------------------! //
   const createUser = (email, password) => {
@@ -45,9 +47,15 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setAuthUser(currentUser);
-        setAuthLoading(false);
+        axiosReq
+          .post("/generate-jwt", { email: currentUser.email })
+          .then(({ data }) => {
+            localStorage.setItem("dmf-lg-club-token", `Bearer ${data.token}`);
+            setAuthLoading(false);
+          });
       } else {
         setAuthUser(null);
+        localStorage.removeItem("dmf-lg-club-token")
         setAuthLoading(false);
       }
     });
@@ -55,7 +63,7 @@ const AuthProvider = ({ children }) => {
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [axiosReq]);
 
   /* --------------------------------------------------
   !------------------ AUTH INFO ---------------------- */
