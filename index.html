@@ -5,9 +5,32 @@
     <link rel="icon" type="image" href="/icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DMF Language Club</title>
+    <style>
+      #preloader {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root" class="hidden"></div>
+    <div id="preloader">
+      <img
+        src="https://i.ibb.co/C9t9y9Q/loading.gif"
+        alt="loading......"
+        width="25%"
+      />
+    </div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      window.addEventListener("load", (event) => {
+        document.getElementById("root").classList.remove("hidden");
+        document.getElementById("preloader").classList.add("hidden");
+      });
+    </script>
   </body>
 </html>
