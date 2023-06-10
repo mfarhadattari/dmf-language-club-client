@@ -40,19 +40,19 @@ const Dashboard = () => {
     </>
   );
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="w-full max-w-7xl mx-auto">
       <div className="drawer lg:drawer-open w-full">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content relative px-10">
+        <div className="drawer-content w-11/12 mx-auto">
+          <div className="py-10">
+            <Outlet></Outlet>
+          </div>
           <label
             htmlFor="my-drawer-2"
             className="btn btn-circle drawer-button lg:hidden absolute top-2 right-2"
           >
             <FaBars></FaBars>
           </label>
-          <div className="py-10">
-            <Outlet></Outlet>
-          </div>
         </div>
         <div className="drawer-side w-full h-full">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>

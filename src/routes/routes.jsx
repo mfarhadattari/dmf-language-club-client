@@ -11,6 +11,8 @@ import PrivateRoute from "./PrivateRoute";
 import ManageUser from "../pages/Admin/ManageUser";
 import AdminRoute from "./AdminRoute";
 import ManageClass from "../pages/Admin/ManageClass";
+import AddClass from "../pages/Instructor/AddClass";
+import InstructorRoute from './InstructorRoute';
 
 const routers = createBrowserRouter([
   {
@@ -47,6 +49,14 @@ const routers = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+        path: "add-class",
+        element: (
+          <InstructorRoute>
+            <AddClass></AddClass>
+          </InstructorRoute>
+        ),
+      },
       {
         path: "manage-user",
         element: (
