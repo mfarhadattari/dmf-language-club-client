@@ -50,12 +50,12 @@ const AuthProvider = ({ children }) => {
         axiosReq
           .post("/generate-jwt", { email: currentUser.email })
           .then(({ data }) => {
-            localStorage.setItem("dmf-lg-club-token", `Bearer ${data.token}`);
+            localStorage.setItem("dmf-lg-club-token", data.token);
             setAuthLoading(false);
           });
       } else {
         setAuthUser(null);
-        localStorage.removeItem("dmf-lg-club-token")
+        localStorage.removeItem("dmf-lg-club-token");
         setAuthLoading(false);
       }
     });
