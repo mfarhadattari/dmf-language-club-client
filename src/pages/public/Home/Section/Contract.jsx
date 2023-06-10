@@ -1,5 +1,5 @@
 import emailjs from "@emailjs/browser";
-import { useRef } from 'react';
+import { useRef } from "react";
 import SuccessAlert from "./../../../../components/Message/SuccessAlert";
 import LoadingBtn from "./../../../../components/Button/LoadingBtn";
 import contractIMG from "../../../../assets/images/home/contract.svg";
@@ -7,7 +7,11 @@ import { useState } from "react";
 
 const Contract = () => {
   const [loading, setLoading] = useState(false);
-  const form = useRef()
+  const form = useRef();
+
+  (function () {
+    emailjs.init("4X1n16MIffv1h3it4");
+  })();
 
   const sendEmail = (event) => {
     event.preventDefault();
@@ -17,7 +21,7 @@ const Contract = () => {
         import.meta.env.VITE_EMAILSERVICEID,
         import.meta.env.VITE_EMAILTEMPLETEID,
         form.current,
-        import.meta.env.VITE_EMAILJSPUBLIC
+        "4X1n16MIffv1h3it4"
       )
       .then((result) => {
         if (result.text === "OK") {
@@ -40,8 +44,8 @@ const Contract = () => {
             <div className="form-control">
               <input
                 type="text"
-                placeholder="Your Email"
-                name="user_name"
+                placeholder="Your Name"
+                name="name"
                 required
                 className="input input-bordered w-full border-blue-600 focus:outline-blue-600"
               />
@@ -50,7 +54,7 @@ const Contract = () => {
               <input
                 type="email"
                 placeholder="Your Email"
-                name="user_email"
+                name="email"
                 required
                 className="input input-bordered w-full border-blue-600 focus:outline-blue-600"
               />
