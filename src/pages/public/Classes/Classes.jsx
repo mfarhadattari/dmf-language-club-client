@@ -4,6 +4,7 @@ import useAxios from "./../../../hooks/useAxios";
 import { useEffect } from "react";
 import Loaders from "./../../../components/Loaders";
 import CourseCard from "./../../../components/Cards/CourseCard";
+import SetTitle from "../../../components/setTitle";
 const Classes = () => {
   const { axiosReq } = useAxios();
   const [allClasses, setAllClasses] = useState([]);
@@ -19,6 +20,7 @@ const Classes = () => {
 
   return (
     <main>
+      <SetTitle title="Classes - DMF Language Club"></SetTitle>
       <Cover
         heading="Our Classes"
         bgImage="bg-[url('https://i.ibb.co/7GkCnvk/webinar-concept-illustration-114360-4764.jpg')]"

@@ -10,6 +10,7 @@ import { updateProfile } from "firebase/auth";
 import SuccessAlert from "../../../components/Message/SuccessAlert";
 import FirebaseErrorAlert from "../../../components/Message/FirebaseErrorAlert";
 import useAxios from "./../../../hooks/useAxios";
+import SetTitle from "../../../components/setTitle";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
@@ -80,6 +81,7 @@ const Register = () => {
 
   return (
     <main>
+      <SetTitle title="Register - DMF Language Club"></SetTitle>
       <section className="my-10">
         <div>
           <div className="card  w-full max-w-3xl mx-auto shadow-2xl bg-base-100">

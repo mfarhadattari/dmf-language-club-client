@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import useAxios from "../../../hooks/useAxios";
 import Loaders from "../../../components/Loaders";
 import InstructorCard from "../../../components/Cards/InstructorCard";
+import SetTitle from "../../../components/setTitle";
 
 const Instructors = () => {
   const { axiosReq } = useAxios();
@@ -20,6 +21,7 @@ const Instructors = () => {
 
   return (
     <main>
+      <SetTitle title="Instructors - DMF Language Club"></SetTitle>
       <Cover
         heading="Our Instructors"
         bgImage="bg-[url('https://i.ibb.co/zFqd4M5/everyone-is-smiling-listens-group-people-business-conference-modern-classroom-daytime-146671-16288.jpg')]"

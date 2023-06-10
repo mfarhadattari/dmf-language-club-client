@@ -9,6 +9,7 @@ import { useState } from "react";
 import useAuthContext from "./../../../hooks/useAuthContext";
 import SuccessAlert from "../../../components/Message/SuccessAlert";
 import FirebaseErrorAlert from "../../../components/Message/FirebaseErrorAlert";
+import SetTitle from "../../../components/setTitle";
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
@@ -42,6 +43,7 @@ const Login = () => {
 
   return (
     <main>
+      <SetTitle title="Login - DMF Language Club"></SetTitle>
       <section className="my-10">
         <div className="hero">
           <div className="hero-content flex-col lg:flex-row">

@@ -40,10 +40,10 @@ const Dashboard = () => {
     </>
   );
   return (
-    <main className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto">
       <div className="drawer lg:drawer-open w-full">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center relative">
+        <div className="drawer-content relative px-10">
           <label
             htmlFor="my-drawer-2"
             className="btn btn-circle drawer-button lg:hidden absolute top-2 right-2"
@@ -72,7 +72,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 
