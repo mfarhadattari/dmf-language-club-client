@@ -11,6 +11,7 @@ const ManageClass = () => {
   const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // TODO: class action functionality
   useEffect(() => {
     secureAxios.get(`/admin/classes?email=${authUser.email}`).then(({ data }) => {
       setClasses(data);

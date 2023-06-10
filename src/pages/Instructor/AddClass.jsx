@@ -3,8 +3,10 @@ import SecondaryBtn from "../../components/Button/SecondaryBtn";
 import ErrorMessage from "../../components/Message/ErrorMessage";
 import SetTitle from "../../components/setTitle";
 import useAuthContext from "../../hooks/useAuthContext";
+import axios from "axios";
 
 const AddClass = () => {
+  // TODO: Add a class Functionality
   const { authUser } = useAuthContext();
   const {
     register,
@@ -13,7 +15,15 @@ const AddClass = () => {
   } = useForm();
 
   const addClass = (data) => {
-    console.log(data);
+    const formData = new FormData();
+    formData.append("image", data.photo[0]);
+
+    axios.post(import.meta.env.VITE_IMG_HOSTING, formData).then(({ data }) => {
+      if (data.success) {
+        const photoURL = data.data.url;
+        console.log(photoURL)
+      }
+    });
   };
 
   return (
@@ -48,9 +58,9 @@ const AddClass = () => {
                 </span>
               </label>
               <input
+                {...register("photo", { required: true })}
                 type="file"
                 className="file-input file-input-bordered border-blue-600 focus:outline-blue-600"
-                {...register("photo", { required: true })}
               />
               {errors.photo?.type == "required" && (
                 <ErrorMessage message="File is required"></ErrorMessage>
@@ -93,7 +103,7 @@ const AddClass = () => {
               )}
             </div>
           </div>
-          <div className="flex flex-col md:flex-row w-full gap-5">
+           <div className="flex flex-col md:flex-row w-full gap-5">
             <div className="form-control w-full">
               <label className="label">
                 <span className="label-text text-base font-bold">

@@ -12,6 +12,7 @@ const ManageUser = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // TODO: User role update functionality
   useEffect(() => {
     secureAxios.get(`/admin/users?email=${authUser.email}`).then(({ data }) => {
       setUsers(data);
