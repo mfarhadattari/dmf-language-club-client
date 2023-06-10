@@ -18,10 +18,18 @@ const AddClass = () => {
     const formData = new FormData();
     formData.append("image", data.photo[0]);
 
-    axios.post(import.meta.env.VITE_IMG_HOSTING, formData).then(({ data }) => {
-      if (data.success) {
-        const photoURL = data.data.url;
-        console.log(photoURL)
+    axios.post(import.meta.env.VITE_IMG_HOSTING, formData).then((res) => {
+      if (res.data.success) {
+        const classInfo = {
+          name: data.name,
+          imageURL: res.data.data.url,
+          instructorName: data.instructorName,
+          instructorEmail: data.instructorEmail,
+          availableSeats: data.availableSeats,
+          price: data.price,
+          status: "pending",
+        };
+        console.log(classInfo);
       }
     });
   };
@@ -77,7 +85,7 @@ const AddClass = () => {
               <input
                 type="text"
                 defaultValue={authUser.displayName}
-                placeholder="Instructor Name"
+                readOnly
                 className="input input-bordered border-blue-600 focus:outline-blue-600"
                 {...register("instructorName", { required: true })}
               />
@@ -94,7 +102,7 @@ const AddClass = () => {
               <input
                 type="email"
                 defaultValue={authUser.email}
-                placeholder="Instructor Email"
+                readOnly
                 className="input input-bordered border-blue-600 focus:outline-blue-600"
                 {...register("instructorEmail", { required: true })}
               />
@@ -103,7 +111,7 @@ const AddClass = () => {
               )}
             </div>
           </div>
-           <div className="flex flex-col md:flex-row w-full gap-5">
+          <div className="flex flex-col md:flex-row w-full gap-5">
             <div className="form-control w-full">
               <label className="label">
                 <span className="label-text text-base font-bold">
