@@ -3,7 +3,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import LoadingBtn from "../../../components/Button/LoadingBtn";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../../components/Message/ErrorMessage";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import { useState } from "react";
 import useAuthContext from "./../../../hooks/useAuthContext";
@@ -19,6 +19,10 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from || "/";
+
   /* ----------------------------------------------------------
   ! ------------------ From Submit Handler ------------------- */
   const onSubmit = (data, event) => {
@@ -28,6 +32,7 @@ const Login = () => {
         SuccessAlert("Successfully Login!");
         setLoading(false);
         event.target.reset();
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         FirebaseErrorAlert(error.message);

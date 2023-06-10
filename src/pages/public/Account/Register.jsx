@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import ErrorMessage from "../../../components/Message/ErrorMessage";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import LoadingBtn from "../../../components/Button/LoadingBtn";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import useAuthContext from "../../../hooks/useAuthContext";
 import { updateProfile } from "firebase/auth";
@@ -15,13 +15,15 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
   const [passwordMatched, setPasswordMatched] = useState(null);
-  const { createUser } = useAuthContext();
+  const { createUser, logoutUser } = useAuthContext();
   const { axiosReq } = useAxios();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const navigate = useNavigate();
 
   /* ----------------------------------------------------------
   ! ------------------ From Submit Handler ------------------- */
@@ -63,6 +65,8 @@ const Register = () => {
                   setLoading(false);
                   SuccessAlert("Successfully Register!");
                   event.target.reset();
+                  logoutUser();
+                  navigate("/login", { replace: true });
                 }
               });
           });

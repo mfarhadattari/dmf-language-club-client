@@ -5,12 +5,17 @@ import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import SuccessAlert from "../../../components/Message/SuccessAlert";
 import FirebaseErrorAlert from "../../../components/Message/FirebaseErrorAlert";
 import useAxios from "../../../hooks/useAxios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SocialLogin = () => {
   const { socialLoginUser } = useAuthContext();
   const { axiosReq } = useAxios();
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state?.from || "/";
 
   const handelSocialLogin = (provider) => {
     socialLoginUser(provider)
@@ -25,6 +30,7 @@ const SocialLogin = () => {
           .then(({ data }) => {
             if (data.insertedId || data.isExist) {
               SuccessAlert("Successfully Login!");
+              navigate(from, { replace: true });
             }
           });
       })
