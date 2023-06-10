@@ -1,37 +1,56 @@
 import { useForm } from "react-hook-form";
 import SecondaryBtn from "../../components/Button/SecondaryBtn";
 import ErrorMessage from "../../components/Message/ErrorMessage";
+import SuccessAlert from "../../components/Message/SuccessAlert";
 import SetTitle from "../../components/setTitle";
 import useAuthContext from "../../hooks/useAuthContext";
+import useSecureAxios from "../../hooks/useSecureAxios";
 import axios from "axios";
+import ErrorAlert from "../../components/Message/ErrorAlert";
 
 const AddClass = () => {
   // TODO: Add a class Functionality
   const { authUser } = useAuthContext();
+  const { secureAxios } = useSecureAxios();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const addClass = (data) => {
+  const addClass = (data, event) => {
     const formData = new FormData();
-    formData.append("image", data.photo[0]);
+    formData.append("image", data.image[0]);
 
-    axios.post(import.meta.env.VITE_IMG_HOSTING, formData).then((res) => {
-      if (res.data.success) {
-        const classInfo = {
-          name: data.name,
-          imageURL: res.data.data.url,
-          instructorName: data.instructorName,
-          instructorEmail: data.instructorEmail,
-          availableSeats: data.availableSeats,
-          price: data.price,
-          status: "pending",
-        };
-        console.log(classInfo);
-      }
-    });
+    axios
+      .post(import.meta.env.VITE_IMG_HOSTING, formData)
+      .then((res) => {
+        if (res.data.success) {
+          const classInfo = {
+            name: data.name,
+            image: res.data.data.url,
+            instructorName: data.instructorName,
+            instructorEmail: data.instructorEmail,
+            availableSeats: parseInt(data.availableSeats),
+            enrolledStudent: 0,
+            price: parseFloat(data.price),
+            status: "pending",
+          };
+
+          secureAxios
+            .post(`/instructor/add-class?email=${authUser.email}`, classInfo)
+            .then(({ data }) => {
+              if (data.insertedId) {
+                SuccessAlert("Added Successfully");
+                event.target.reset();
+              }
+            });
+        }
+      })
+      .catch((error) => {
+        ErrorAlert(error.message);
+      });
   };
 
   return (
@@ -66,7 +85,7 @@ const AddClass = () => {
                 </span>
               </label>
               <input
-                {...register("photo", { required: true })}
+                {...register("image", { required: true })}
                 type="file"
                 className="file-input file-input-bordered border-blue-600 focus:outline-blue-600"
               />
@@ -122,13 +141,13 @@ const AddClass = () => {
                 type="number"
                 placeholder="Available Seats"
                 className="input input-bordered border-blue-600 focus:outline-blue-600"
-                {...register("availableSeats", { required: true, min: 10 })}
+                {...register("availableSeats", { required: true, min: 0 })}
               />
               {errors.availableSeats?.type == "required" && (
                 <ErrorMessage message="Available Seats is required"></ErrorMessage>
               )}
               {errors.availableSeats?.type == "min" && (
-                <ErrorMessage message="Available seats is not less then 10"></ErrorMessage>
+                <ErrorMessage message="Available seats is not less then 0"></ErrorMessage>
               )}
             </div>
             <div className="form-control w-full">
