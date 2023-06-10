@@ -2,6 +2,7 @@ import { FaBars } from "react-icons/fa";
 import Heading from "../components/Heading";
 import NavigationLink from "../components/NavigationLink";
 import useUserRole from "../hooks/useUserRole";
+import { Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   const { userRole } = useUserRole();
@@ -50,7 +51,7 @@ const Dashboard = () => {
             <FaBars></FaBars>
           </label>
           <div className="py-10">
-            <h1>This is Dashboard</h1>
+            <Outlet></Outlet>
           </div>
         </div>
         <div className="drawer-side w-full h-full">
@@ -59,7 +60,6 @@ const Dashboard = () => {
             <Heading></Heading>
             <div className="h-full px-20 py-10">
               <ul className="menu ">
-                
                 {userRole == "admin"
                   ? adminOptions
                   : userRole == "instructor"
