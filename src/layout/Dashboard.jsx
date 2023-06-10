@@ -1,8 +1,11 @@
 import { FaBars } from "react-icons/fa";
 import Heading from "../components/Heading";
 import NavigationLink from "../components/NavigationLink";
+import useUserRole from "../hooks/useUserRole";
 
 const Dashboard = () => {
+  const { userRole } = useUserRole();
+
   const studentOptions = (
     <>
       <NavigationLink to="student-profile">Profile</NavigationLink>
@@ -31,7 +34,7 @@ const Dashboard = () => {
   const publicOptions = (
     <>
       <NavigationLink to="/">Home</NavigationLink>
-      <NavigationLink to="/instructors">Classes</NavigationLink>
+      <NavigationLink to="/instructors">Instructors</NavigationLink>
       <NavigationLink to="/classes">Classes</NavigationLink>
     </>
   );
@@ -50,14 +53,18 @@ const Dashboard = () => {
             <h1>This is Dashboard</h1>
           </div>
         </div>
-        <div className="drawer-side w-full">
+        <div className="drawer-side w-full h-full">
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <div className="h-full bg-base-200 text-base-content flex flex-col items-center pt-10">
             <Heading></Heading>
-            <div className="h-full p-10">
+            <div className="h-full px-20 py-10">
               <ul className="menu ">
-                {/* Sidebar content here */}
-                {studentOptions}
+                
+                {userRole == "admin"
+                  ? adminOptions
+                  : userRole == "instructor"
+                  ? instructorOptions
+                  : studentOptions}
               </ul>
               <div className="divider after:bg-blue-600 before:bg-blue-600"></div>
               <ul className="menu">{publicOptions}</ul>
