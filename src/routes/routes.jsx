@@ -10,6 +10,7 @@ import Dashboard from "../layout/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import ManageUser from "../pages/Admin/ManageUser";
 import AdminRoute from "./AdminRoute";
+import ManageClass from "../pages/Admin/ManageClass";
 
 const routers = createBrowserRouter([
   {
@@ -51,6 +52,14 @@ const routers = createBrowserRouter([
         element: (
           <AdminRoute>
             <ManageUser></ManageUser>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manage-class",
+        element: (
+          <AdminRoute>
+            <ManageClass></ManageClass>
           </AdminRoute>
         ),
       },
