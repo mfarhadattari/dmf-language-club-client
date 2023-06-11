@@ -5,6 +5,8 @@ const ClassRow = ({
   deniedClass,
   classFeedback,
 }) => {
+  // TODO: Feedback btn disabled
+
   return (
     <tr>
       <th className="text-xl font-semibold">{index + 1}</th>

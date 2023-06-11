@@ -1,4 +1,17 @@
+import Swal from "sweetalert2";
+
 const InstructorClassRow = ({ classItem, index }) => {
+  // TODO: Feedback btn disabled
+
+  const seeFeedback = (feedback) => {
+    Swal.fire({
+      title: feedback,
+      icon: "info",
+      showCloseButton: true,
+      showConfirmButton: false,
+    });
+  };
+
   return (
     <tr>
       <th className="text-xl font-semibold">{index + 1}</th>
@@ -23,9 +36,20 @@ const InstructorClassRow = ({ classItem, index }) => {
       </td>
       <td>
         <div className="flex flex-col space-y-2 justify-center items-center">
-          <p className={`uppercase text-lg font-semibold ${classItem?.status === 'approve' ? "text-green-600": classItem?.status === 'denied' ? "text-red-600" : "text-blue-600"}`}>{classItem?.status}</p>
+          <p
+            className={`uppercase text-lg font-semibold ${
+              classItem?.status === "approve"
+                ? "text-green-600"
+                : classItem?.status === "denied"
+                ? "text-red-600"
+                : "text-blue-600"
+            }`}
+          >
+            {classItem?.status}
+          </p>
           <button
             className="btn btn-outline btn-xs"
+            onClick={() => seeFeedback(classItem?.feedback)}
             disabled={classItem?.status !== "denied"}
           >
             Feedback
