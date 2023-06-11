@@ -1,9 +1,9 @@
 import emailjs from "@emailjs/browser";
 import { useRef } from "react";
 import SuccessAlert from "./../../../../components/Message/SuccessAlert";
-import LoadingBtn from "./../../../../components/Button/LoadingBtn";
 import contractIMG from "../../../../assets/images/home/contract.svg";
 import { useState } from "react";
+import SecondaryBtn from "../../../../components/Button/SecondaryBtn";
 
 const Contract = () => {
   const [loading, setLoading] = useState(false);
@@ -69,7 +69,7 @@ const Contract = () => {
               />
             </div>
             <div className="form-control">
-              <LoadingBtn loading={loading}>Send Message</LoadingBtn>
+              <SecondaryBtn loading={loading}>Send Message</SecondaryBtn>
             </div>
           </form>
         </div>

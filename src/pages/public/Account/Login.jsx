@@ -1,6 +1,5 @@
 import loginImg from "../../../assets/images/user.gif";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import LoadingBtn from "../../../components/Button/LoadingBtn";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../../components/Message/ErrorMessage";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -10,6 +9,7 @@ import useAuthContext from "./../../../hooks/useAuthContext";
 import SuccessAlert from "../../../components/Message/SuccessAlert";
 import FirebaseErrorAlert from "../../../components/Message/FirebaseErrorAlert";
 import SetTitle from "../../../components/setTitle";
+import SecondaryBtn from "../../../components/Button/SecondaryBtn";
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
@@ -93,9 +93,9 @@ const Login = () => {
                   </div>
                 </div>
                 <div className="form-control mt-2">
-                  <LoadingBtn loading={loading} type="submit">
+                  <SecondaryBtn loading={loading} type="submit">
                     Login
-                  </LoadingBtn>
+                  </SecondaryBtn>
                 </div>
               </form>
               <p className="text-center my-5 flex flex-wrap justify-center px-5">

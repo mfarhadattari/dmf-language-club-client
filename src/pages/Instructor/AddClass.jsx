@@ -7,7 +7,7 @@ import useSecureAxios from "../../hooks/useSecureAxios";
 import axios from "axios";
 import ErrorAlert from "../../components/Message/ErrorAlert";
 import { useState } from "react";
-import LoadingBtn from "../../components/Button/LoadingBtn";
+import SecondaryBtn from "./../../components/Button/SecondaryBtn";
 
 const AddClass = () => {
   const { authUser } = useAuthContext();
@@ -175,7 +175,7 @@ const AddClass = () => {
           </div>
 
           <div className="form-control mt-6">
-            <LoadingBtn loading={loading}>Add Class</LoadingBtn>
+            <SecondaryBtn loading={loading}>Add Class</SecondaryBtn>
           </div>
         </form>
       </section>

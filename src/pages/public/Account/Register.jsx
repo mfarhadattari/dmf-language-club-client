@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import ErrorMessage from "../../../components/Message/ErrorMessage";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import LoadingBtn from "../../../components/Button/LoadingBtn";
 import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
 import useAuthContext from "../../../hooks/useAuthContext";
@@ -11,6 +10,7 @@ import SuccessAlert from "../../../components/Message/SuccessAlert";
 import FirebaseErrorAlert from "../../../components/Message/FirebaseErrorAlert";
 import useAxios from "./../../../hooks/useAxios";
 import SetTitle from "../../../components/setTitle";
+import SecondaryBtn from "../../../components/Button/SecondaryBtn";
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
@@ -215,9 +215,9 @@ const Register = () => {
               </div>
 
               <div className="form-control mt-2">
-                <LoadingBtn loading={loading} type="submit">
+                <SecondaryBtn loading={loading} type="submit">
                   Create Account
-                </LoadingBtn>
+                </SecondaryBtn>
               </div>
             </form>
             <p className="text-center my-5 flex flex-wrap px-5 justify-center">

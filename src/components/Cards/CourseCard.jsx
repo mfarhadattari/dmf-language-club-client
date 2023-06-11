@@ -6,6 +6,7 @@ import ConfirmationAlert from "../Message/ConfirmationAlert";
 import { useLocation, useNavigate } from "react-router-dom";
 import useSecureAxios from "../../hooks/useSecureAxios";
 import SuccessAlert from "../Message/SuccessAlert";
+import { useState } from "react";
 
 // TODO: Only Student can select other select btn disabled
 
@@ -14,6 +15,7 @@ const CourseCard = ({ item }) => {
   const { authUser } = useAuthContext();
   const { secureAxios } = useSecureAxios();
 
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -25,6 +27,7 @@ const CourseCard = ({ item }) => {
         }
       });
     }
+    setLoading(true);
     const cart = {
       displayName: authUser.displayName,
       email: authUser.email,
@@ -39,6 +42,7 @@ const CourseCard = ({ item }) => {
       .then(({ data }) => {
         if (data.insertedId) {
           SuccessAlert("Successfully Selected!");
+          setLoading(false);
         }
       });
   };
@@ -69,6 +73,7 @@ const CourseCard = ({ item }) => {
               userRole === "admin" ||
               userRole === "instructor"
             }
+            loading={loading}
           >
             Select
           </PrimaryBtn>
