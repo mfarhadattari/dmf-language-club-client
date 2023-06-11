@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
 import useSecureAxios from "../../hooks/useSecureAxios";
 import useAuthContext from "../../hooks/useAuthContext";
-import SetTitle from "../../components/SetTitle";
+
 import Loaders from "../../components/Loaders";
 import ClassRow from "../../components/TableRow/ClassRow";
 import { useQuery } from "@tanstack/react-query";
+import SetTitle from "../../components/setTitle";
+import ConfirmationAlert from "./../../components/Message/ConfirmationAlert";
+import SuccessAlert from "./../../components/Message/SuccessAlert";
 
 const ManageClass = () => {
   const { authUser } = useAuthContext();
@@ -13,7 +15,7 @@ const ManageClass = () => {
   // TODO: class action functionality
   const {
     isLoading,
-    refetch: refetchUser,
+    refetch: refetchClass,
     data: classes = [],
   } = useQuery({
     queryKey: ["classes", authUser?.email],
@@ -24,6 +26,22 @@ const ManageClass = () => {
       return res.data;
     },
   });
+
+  const approveClass = (id) => {
+    ConfirmationAlert("Sure Approve?").then((res) => {
+      if (res.isConfirmed) {
+        // console.log(id);
+        secureAxios
+          .patch(`/admin/approve-class/${id}?email=${authUser.email}`)
+          .then(({ data }) => {
+            if (data.modifiedCount > 0) {
+              refetchClass();
+              SuccessAlert("Approve Successfully!");
+            }
+          });
+      }
+    });
+  };
 
   return (
     <main>
@@ -52,6 +70,7 @@ const ManageClass = () => {
                     key={classItem._id}
                     classItem={classItem}
                     index={index}
+                    approveClass={approveClass}
                   ></ClassRow>
                 ))}
               </tbody>

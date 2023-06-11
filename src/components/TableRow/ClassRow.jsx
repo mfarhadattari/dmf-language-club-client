@@ -1,4 +1,4 @@
-const ClassRow = ({ classItem, index }) => {
+const ClassRow = ({ classItem, index, approveClass }) => {
   return (
     <tr>
       <th className="text-xl font-semibold">{index + 1}</th>
@@ -6,7 +6,7 @@ const ClassRow = ({ classItem, index }) => {
         <div className="flex items-center space-x-3">
           <div className="w-28 h-28 border rounded-lg">
             <img
-            className="w-full h-full"
+              className="w-full h-full"
               src={classItem.image}
               alt={classItem?.name}
             />
@@ -21,15 +21,47 @@ const ClassRow = ({ classItem, index }) => {
         </div>
       </td>
       <td className="text-base font-semibold">
-        <p>Status: {classItem?.status}</p>
+        <p
+          className={`uppercase ${
+            classItem?.status === "approve"
+              ? "text-green-600"
+              : classItem?.status === "denied"
+              ? "text-red-600"
+              : "text-blue-600"
+          }`}
+        >
+          {classItem?.status || "PENDING"}
+        </p>
         <p>Seat: {classItem?.availableSeats}</p>
         <p>Price: ${classItem?.price}</p>
       </td>
-      <th className="flex flex-col space-y-2 justify-center">
-        <button className="btn btn-outline btn-xs text-green-600 hover:bg-green-600 hover:border-0">Approve</button>
-        <button className="btn btn-outline btn-xs text-red-600 hover:bg-red-600 hover:border-0">Deny</button>
-        <button className="btn btn-outline btn-xs">Feedback</button>
-      </th>
+      <td>
+        <div className="flex flex-col space-y-2 justify-center">
+          <button
+            className="btn btn-outline btn-xs text-green-600 hover:bg-green-600 hover:border-0"
+            onClick={() => approveClass(classItem._id)}
+            disabled={
+              classItem.status === "denied" || classItem.status === "approve"
+            }
+          >
+            Approve
+          </button>
+          <button
+            className="btn btn-outline btn-xs text-red-600 hover:bg-red-600 hover:border-0"
+            disabled={
+              classItem.status === "denied" || classItem.status === "approve"
+            }
+          >
+            Deny
+          </button>
+          <button
+            className="btn bg-blue-600 btn-xs text-white"
+            disabled={classItem.status !== "denied"}
+          >
+            Feedback
+          </button>
+        </div>
+      </td>
     </tr>
   );
 };
