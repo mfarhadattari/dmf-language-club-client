@@ -1,4 +1,4 @@
-const UserRow = ({ user, index, makeAdmin }) => {
+const UserRow = ({ user, index, makeAdmin, makeInstructor }) => {
   return (
     <tr className="hover:border">
       <th className="text-xl">{index + 1}</th>
@@ -13,12 +13,15 @@ const UserRow = ({ user, index, makeAdmin }) => {
         <h1 className="text-xl font-bold">{user?.displayName}</h1>
         <p className="text-lg">{user?.email}</p>
       </td>
-      <td className="uppercase font-semibold text-center">{user?.role || "student"}</td>
+      <td className="uppercase font-semibold text-center">
+        {user?.role || "student"}
+      </td>
       <th>
         <div className="flex flex-col space-y-3">
           <button
             className="btn btn-outline text-green-600 px-0 hover:bg-green-600 hover:border-0"
             disabled={user?.role === "instructor"}
+            onClick={() => makeInstructor(user)}
           >
             Make Instructor
           </button>

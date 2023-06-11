@@ -11,20 +11,20 @@ const ManageUser = () => {
   const { authUser } = useAuthContext();
   const { secureAxios } = useSecureAxios();
 
-  // TODO: User role update functionality
-
+  // !---------------------- Get User -------------------! //
   const {
     data: users = [],
     isLoading,
     refetch: refetchUsers,
   } = useQuery({
-    queryKey: [""],
+    queryKey: ["users"],
     queryFn: async () => {
       const res = await secureAxios.get(`/admin/users?email=${authUser.email}`);
       return res.data;
     },
   });
 
+  // !---------------------- Make Admin -------------------! //
   const makeAdmin = (user) => {
     ConfirmationAlert("Want to make Admin?").then((res) => {
       if (res.isConfirmed) {
@@ -35,6 +35,24 @@ const ManageUser = () => {
           .then(({ data }) => {
             if (data.modifiedCount > 0) {
               SuccessAlert(`${user.displayName} is now Admin`);
+              refetchUsers();
+            }
+          });
+      }
+    });
+  };
+
+  // !---------------------- Make Instructor -------------------! //
+  const makeInstructor = (user) => {
+    ConfirmationAlert("Want to make Instructor?").then((res) => {
+      if (res.isConfirmed) {
+        secureAxios
+          .patch(`/admin/make-instructor?email=${authUser.email}`, {
+            email: user.email,
+          })
+          .then(({ data }) => {
+            if (data.modifiedCount > 0) {
+              SuccessAlert(`${user.displayName} is now Instructor`);
               refetchUsers();
             }
           });
@@ -70,6 +88,7 @@ const ManageUser = () => {
                     user={user}
                     index={index}
                     makeAdmin={makeAdmin}
+                    makeInstructor={makeInstructor}
                   ></UserRow>
                 ))}
               </tbody>
