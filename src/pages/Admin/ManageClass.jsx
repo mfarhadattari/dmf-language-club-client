@@ -1,23 +1,29 @@
 import { useEffect, useState } from "react";
 import useSecureAxios from "../../hooks/useSecureAxios";
 import useAuthContext from "../../hooks/useAuthContext";
-import SetTitle from "../../components/setTitle";
+import SetTitle from "../../components/SetTitle";
 import Loaders from "../../components/Loaders";
 import ClassRow from "../../components/TableRow/ClassRow";
+import { useQuery } from "@tanstack/react-query";
 
 const ManageClass = () => {
   const { authUser } = useAuthContext();
   const { secureAxios } = useSecureAxios();
-  const [classes, setClasses] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   // TODO: class action functionality
-  useEffect(() => {
-    secureAxios.get(`/admin/classes?email=${authUser.email}`).then(({ data }) => {
-      setClasses(data);
-      setLoading(false);
-    });
-  }, [secureAxios, authUser]);
+  const {
+    isLoading,
+    refetch: refetchUser,
+    data: classes = [],
+  } = useQuery({
+    queryKey: ["classes", authUser?.email],
+    queryFn: async () => {
+      const res = await secureAxios.get(
+        `/admin/classes?email=${authUser.email}`
+      );
+      return res.data;
+    },
+  });
 
   return (
     <main>
@@ -25,7 +31,7 @@ const ManageClass = () => {
       <div className="p-5">
         <h1 className="text-center text-3xl font-bold">Manage Classes</h1>
       </div>
-      {loading ? (
+      {isLoading ? (
         <Loaders></Loaders>
       ) : (
         <section>
@@ -42,7 +48,11 @@ const ManageClass = () => {
               </thead>
               <tbody>
                 {classes.map((classItem, index) => (
-                  <ClassRow key={classItem._id} classItem={classItem} index={index}></ClassRow>
+                  <ClassRow
+                    key={classItem._id}
+                    classItem={classItem}
+                    index={index}
+                  ></ClassRow>
                 ))}
               </tbody>
             </table>

@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import SecondaryBtn from "../../components/Button/SecondaryBtn";
 import ErrorMessage from "../../components/Message/ErrorMessage";
 import SuccessAlert from "../../components/Message/SuccessAlert";
 import SetTitle from "../../components/setTitle";
@@ -7,11 +6,14 @@ import useAuthContext from "../../hooks/useAuthContext";
 import useSecureAxios from "../../hooks/useSecureAxios";
 import axios from "axios";
 import ErrorAlert from "../../components/Message/ErrorAlert";
+import { useState } from "react";
+import LoadingBtn from "../../components/Button/LoadingBtn";
 
 const AddClass = () => {
   // TODO: Add a class Functionality
   const { authUser } = useAuthContext();
   const { secureAxios } = useSecureAxios();
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -20,6 +22,7 @@ const AddClass = () => {
   } = useForm();
 
   const addClass = (data, event) => {
+    setLoading(true);
     const formData = new FormData();
     formData.append("image", data.image[0]);
 
@@ -43,6 +46,7 @@ const AddClass = () => {
             .then(({ data }) => {
               if (data.insertedId) {
                 SuccessAlert("Added Successfully");
+                setLoading(false);
                 event.target.reset();
               }
             });
@@ -50,6 +54,7 @@ const AddClass = () => {
       })
       .catch((error) => {
         ErrorAlert(error.message);
+        setLoading(false);
       });
   };
 
@@ -170,7 +175,7 @@ const AddClass = () => {
           </div>
 
           <div className="form-control mt-6">
-            <SecondaryBtn>Add Class</SecondaryBtn>
+            <LoadingBtn loading={loading}>Add Class</LoadingBtn>
           </div>
         </form>
       </section>
