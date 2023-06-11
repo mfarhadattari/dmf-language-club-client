@@ -30,13 +30,27 @@ const ManageClass = () => {
   const approveClass = (id) => {
     ConfirmationAlert("Sure Approve?").then((res) => {
       if (res.isConfirmed) {
-        // console.log(id);
         secureAxios
           .patch(`/admin/approve-class/${id}?email=${authUser.email}`)
           .then(({ data }) => {
             if (data.modifiedCount > 0) {
               refetchClass();
               SuccessAlert("Approve Successfully!");
+            }
+          });
+      }
+    });
+  };
+
+  const deniedClass = (id) => {
+    ConfirmationAlert("Sure Denied?").then((res) => {
+      if (res.isConfirmed) {
+        secureAxios
+          .patch(`/admin/denied-class/${id}?email=${authUser.email}`)
+          .then(({ data }) => {
+            if (data.modifiedCount > 0) {
+              refetchClass();
+              SuccessAlert("Denied Successfully!");
             }
           });
       }
@@ -71,6 +85,7 @@ const ManageClass = () => {
                     classItem={classItem}
                     index={index}
                     approveClass={approveClass}
+                    deniedClass={deniedClass}
                   ></ClassRow>
                 ))}
               </tbody>

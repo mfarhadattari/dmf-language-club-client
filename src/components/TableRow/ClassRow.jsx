@@ -1,4 +1,4 @@
-const ClassRow = ({ classItem, index, approveClass }) => {
+const ClassRow = ({ classItem, index, approveClass, deniedClass }) => {
   return (
     <tr>
       <th className="text-xl font-semibold">{index + 1}</th>
@@ -48,6 +48,7 @@ const ClassRow = ({ classItem, index, approveClass }) => {
           </button>
           <button
             className="btn btn-outline btn-xs text-red-600 hover:bg-red-600 hover:border-0"
+            onClick={() => deniedClass(classItem._id)}
             disabled={
               classItem.status === "denied" || classItem.status === "approve"
             }
