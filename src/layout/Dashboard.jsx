@@ -3,6 +3,7 @@ import Heading from "../components/Heading";
 import NavigationLink from "../components/NavigationLink";
 import useUserRole from "../hooks/useUserRole";
 import { Outlet } from "react-router-dom";
+import Avatar from "./../components/Avatar";
 
 const Dashboard = () => {
   const { userRole } = useUserRole();
@@ -59,6 +60,7 @@ const Dashboard = () => {
           <div className="h-full bg-base-200 text-base-content flex flex-col items-center pt-10">
             <Heading></Heading>
             <div className="h-full px-20 py-10">
+              <Avatar></Avatar>
               <ul className="menu ">
                 {userRole == "admin"
                   ? adminOptions

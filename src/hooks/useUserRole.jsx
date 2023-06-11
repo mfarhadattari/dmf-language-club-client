@@ -9,10 +9,12 @@ const useUserRole = () => {
   const [roleLoading, setRoleLoading] = useState(true);
 
   useEffect(() => {
-    secureAxios.get(`/user-role?email=${authUser.email}`).then(({ data }) => {
-      setUserRole(data.role);
-      setRoleLoading(false);
-    });
+    if (authUser) {
+      secureAxios.get(`/user-role?email=${authUser.email}`).then(({ data }) => {
+        setUserRole(data.role);
+        setRoleLoading(false);
+      });
+    }
   }, [authUser, secureAxios]);
 
   return { userRole, roleLoading };

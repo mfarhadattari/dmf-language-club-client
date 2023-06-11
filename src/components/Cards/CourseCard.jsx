@@ -1,9 +1,12 @@
 import { FaChalkboardTeacher } from "react-icons/fa";
 import PrimaryBtn from "../Button/PrimaryBtn";
+import useUserRole from "../../hooks/useUserRole";
 
 // TODO: Only Student can select other select btn disabled
 
 const CourseCard = ({ item }) => {
+  const { userRole } = useUserRole();
+
   return (
     <div className="card shadow-2xl">
       <figure>
@@ -18,10 +21,18 @@ const CourseCard = ({ item }) => {
         <p className="flex gap-2 text-xl items-center font-semibold">
           <FaChalkboardTeacher></FaChalkboardTeacher> {item.instructorName}
         </p>
-        <p className="text-lg">Available: {item.availableSeats}</p>
-        <p className="text-lg">Price: {item.price}</p>
+        <div className="flex justify-between">
+          <p className="text-lg">Available Seat: {item.availableSeats}</p>
+          <p className="text-lg">Price: {item.price}</p>
+        </div>
         <div className="card-actions">
-          <PrimaryBtn disabled={item?.availableSeats < 1 ? true : false}>
+          <PrimaryBtn
+            disabled={
+              item?.availableSeats < 1 ||
+              userRole === "admin" ||
+              userRole === "instructor"
+            }
+          >
             Select
           </PrimaryBtn>
         </div>
