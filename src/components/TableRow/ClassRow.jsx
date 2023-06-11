@@ -1,4 +1,10 @@
-const ClassRow = ({ classItem, index, approveClass, deniedClass }) => {
+const ClassRow = ({
+  classItem,
+  index,
+  approveClass,
+  deniedClass,
+  classFeedback,
+}) => {
   return (
     <tr>
       <th className="text-xl font-semibold">{index + 1}</th>
@@ -7,7 +13,7 @@ const ClassRow = ({ classItem, index, approveClass, deniedClass }) => {
           <div className="w-28 h-28 border rounded-lg">
             <img
               className="w-full h-full"
-              src={classItem.image}
+              src={classItem?.image}
               alt={classItem?.name}
             />
           </div>
@@ -16,8 +22,8 @@ const ClassRow = ({ classItem, index, approveClass, deniedClass }) => {
       </td>
       <td>
         <div>
-          <div className="font-bold">{classItem.instructorName}</div>
-          <div className="text-sm opacity-50">{classItem.instructorEmail}</div>
+          <div className="font-bold">{classItem?.instructorName}</div>
+          <div className="text-sm opacity-50">{classItem?.instructorEmail}</div>
         </div>
       </td>
       <td className="text-base font-semibold">
@@ -39,25 +45,26 @@ const ClassRow = ({ classItem, index, approveClass, deniedClass }) => {
         <div className="flex flex-col space-y-2 justify-center">
           <button
             className="btn btn-outline btn-xs text-green-600 hover:bg-green-600 hover:border-0"
-            onClick={() => approveClass(classItem._id)}
+            onClick={() => approveClass(classItem?._id)}
             disabled={
-              classItem.status === "denied" || classItem.status === "approve"
+              classItem?.status === "denied" || classItem?.status === "approve"
             }
           >
             Approve
           </button>
           <button
             className="btn btn-outline btn-xs text-red-600 hover:bg-red-600 hover:border-0"
-            onClick={() => deniedClass(classItem._id)}
+            onClick={() => deniedClass(classItem?._id)}
             disabled={
-              classItem.status === "denied" || classItem.status === "approve"
+              classItem?.status === "denied" || classItem?.status === "approve"
             }
           >
             Deny
           </button>
           <button
             className="btn bg-blue-600 btn-xs text-white"
-            disabled={classItem.status !== "denied"}
+            onClick={() => classFeedback(classItem._id)}
+            disabled={classItem?.status === "pending"}
           >
             Feedback
           </button>

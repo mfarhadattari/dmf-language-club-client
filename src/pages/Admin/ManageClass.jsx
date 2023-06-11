@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import SetTitle from "../../components/setTitle";
 import ConfirmationAlert from "./../../components/Message/ConfirmationAlert";
 import SuccessAlert from "./../../components/Message/SuccessAlert";
+import Feedback from "../../components/Message/Feedback";
 
 const ManageClass = () => {
   const { authUser } = useAuthContext();
@@ -56,6 +57,22 @@ const ManageClass = () => {
       }
     });
   };
+  const classFeedback = (id) => {
+    Feedback().then((result) => {
+      if (result.isConfirmed) {
+        const feedback = result.value;
+        secureAxios
+          .post(`/admin/class-feedback/${id}?email=${authUser?.email}`, {
+            feedback: feedback,
+          })
+          .then(({ data }) => {
+            if (data.modifiedCount > 0) {
+              SuccessAlert("Feedback send!");
+            }
+          });
+      }
+    });
+  };
 
   return (
     <main>
@@ -86,6 +103,7 @@ const ManageClass = () => {
                     index={index}
                     approveClass={approveClass}
                     deniedClass={deniedClass}
+                    classFeedback={classFeedback}
                   ></ClassRow>
                 ))}
               </tbody>
