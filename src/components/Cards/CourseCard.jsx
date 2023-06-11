@@ -6,7 +6,7 @@ import ConfirmationAlert from "../Message/ConfirmationAlert";
 import { useLocation, useNavigate } from "react-router-dom";
 import useSecureAxios from "../../hooks/useSecureAxios";
 import SuccessAlert from "../Message/SuccessAlert";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // TODO: Only Student can select other select btn disabled
 
@@ -16,8 +16,19 @@ const CourseCard = ({ item }) => {
   const { secureAxios } = useSecureAxios();
 
   const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (authUser) {
+      secureAxios
+        .get(`/student/check-class/${item._id}?email=${authUser.email}`)
+        .then(({ data }) => {
+          setStatus(data.status);
+        });
+    }
+  }, [authUser, item, secureAxios]);
 
   const selectClass = (classItem) => {
     if (!authUser) {
@@ -71,11 +82,24 @@ const CourseCard = ({ item }) => {
             disabled={
               item?.availableSeats < 1 ||
               userRole === "admin" ||
-              userRole === "instructor"
+              userRole === "instructor" ||
+              status === "enrolled" ||
+              status === "selected"
             }
             loading={loading}
           >
-            Select
+            <span
+              className={`${
+                status === "enrolled" ||
+                (status === "selected" && "text-red-600 font-bold")
+              }`}
+            >
+              {status === "enrolled"
+                ? "Enrolled"
+                : status === "selected"
+                ? "Selected"
+                : "Select"}
+            </span>
           </PrimaryBtn>
         </div>
       </div>
