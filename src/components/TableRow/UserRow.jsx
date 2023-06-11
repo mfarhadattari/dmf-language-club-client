@@ -5,12 +5,12 @@ const UserRow = ({ user, index }) => {
       <td>
         <div className="avatar">
           <div className="mask mask-circle w-20 h-20">
-            <img src={user?.photoURL} alt={user?.name} />
+            <img src={user?.photoURL} alt={user?.displayName} />
           </div>
         </div>
       </td>
       <td>
-        <h1 className="text-xl font-bold">{user?.name}</h1>
+        <h1 className="text-xl font-bold">{user?.displayName}</h1>
         <p className="text-lg">{user?.email}</p>
       </td>
       <td className="uppercase font-semibold text-center">{user?.role}</td>

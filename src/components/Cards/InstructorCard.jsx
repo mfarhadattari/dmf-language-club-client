@@ -6,12 +6,12 @@ const InstructorCard = ({ instructor }) => {
       <figure className="px-10 py-10">
         <img
           src={instructor.photoURL}
-          alt={instructor.name}
+          alt={instructor.displayName}
           className="h-[200px] rounded-full"
         />
       </figure>
       <div className="card-body items-center">
-        <h2 className="card-title">{instructor.name}</h2>
+        <h2 className="card-title">{instructor.displayName}</h2>
 
         <p className="text-lg">
           {instructor.email}

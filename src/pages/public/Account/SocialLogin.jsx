@@ -21,9 +21,9 @@ const SocialLogin = () => {
     socialLoginUser(provider)
       .then(({ user }) => {
         axiosReq
-          .post("/user/create-user", {
+          .post("/create-user", {
             email: user.email,
-            name: user.displayName,
+            displayName: user.displayName,
             photoURL: user.photoURL,
             role: "student",
           })

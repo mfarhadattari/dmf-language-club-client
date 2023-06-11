@@ -52,9 +52,9 @@ const Register = () => {
             photoURL: photoURL,
           }).then(() => {
             axiosReq
-              .post("/user/create-user", {
+              .post("/create-user", {
                 email,
-                name,
+                displayName: name,
                 photoURL,
                 role: "student",
                 gender,
