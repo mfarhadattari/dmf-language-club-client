@@ -4,12 +4,19 @@ import useSecureAxios from "../../hooks/useSecureAxios";
 import Loaders from "../../components/Loaders";
 import useAuthContext from "../../hooks/useAuthContext";
 import CartItem from "../../components/TableRow/CartItem";
+import ConfirmationAlert from "./../../components/Message/ConfirmationAlert";
+import SuccessAlert from "./../../components/Message/SuccessAlert";
 
 const SelectedClass = () => {
   const { secureAxios } = useSecureAxios();
   const { authUser, authLoading } = useAuthContext();
 
-  const { data: carts = [], isLoading } = useQuery({
+  // !--------------- GET Carts Data -----------------! //
+  const {
+    data: carts = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["carts", secureAxios, authUser],
     queryFn: async () => {
       const res = await secureAxios.get(
@@ -19,6 +26,23 @@ const SelectedClass = () => {
     },
     enabled: !authLoading,
   });
+
+  // ! --------------------- Delete from Carts -----------! //
+  const deleteFromCart = (id) => {
+    ConfirmationAlert("Sure want to delete?").then((res) => {
+      if (res.isConfirmed) {
+        secureAxios
+          .delete(`/student/delete-from-carts/${id}?email=${authUser?.email}`)
+          .then(({ data }) => {
+            if (data.deletedCount > 0) {
+              SuccessAlert("Successfully Deleted!");
+              refetch();
+            }
+          });
+      }
+    });
+  };
+
   return (
     <main>
       <SetTitle title="Selected Class - DMF Language Club"></SetTitle>
@@ -46,6 +70,7 @@ const SelectedClass = () => {
                     key={cartItem._id}
                     index={index}
                     cartItem={cartItem}
+                    deleteFromCart={deleteFromCart}
                   ></CartItem>
                 ))}
               </tbody>

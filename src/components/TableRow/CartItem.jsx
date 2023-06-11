@@ -1,4 +1,4 @@
-const CartItem = ({ index, cartItem }) => {
+const CartItem = ({ index, cartItem, deleteFromCart }) => {
   return (
     <tr>
       <th className="text-xl font-semibold">{index + 1}</th>
@@ -17,7 +17,10 @@ const CartItem = ({ index, cartItem }) => {
       </td>
       <td>
         <div className="flex flex-col space-y-2 justify-center items-center w-3/4 mx-auto">
-          <button className="btn btn-outline text-red-600 border-2 hover:bg-red-600 hover:border-0 w-full">
+          <button
+            onClick={() => deleteFromCart(cartItem._id)}
+            className="btn btn-outline text-red-600 border-2 hover:bg-red-600 hover:border-0 w-full"
+          >
             Delete
           </button>
           <button className="btn btn-outline text-green-600 border-2 hover:bg-green-600 hover:border-0 w-full">
