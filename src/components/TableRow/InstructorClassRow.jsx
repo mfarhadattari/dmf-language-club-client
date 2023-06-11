@@ -1,7 +1,6 @@
 import Swal from "sweetalert2";
 
 const InstructorClassRow = ({ classItem, index }) => {
-  // TODO: Feedback btn disabled
 
   const seeFeedback = (feedback) => {
     Swal.fire({

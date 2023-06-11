@@ -5,8 +5,6 @@ const ClassRow = ({
   deniedClass,
   classFeedback,
 }) => {
-  // TODO: Feedback btn disabled
-
   return (
     <tr>
       <th className="text-xl font-semibold">{index + 1}</th>
@@ -66,7 +64,7 @@ const ClassRow = ({
           <button
             className="btn bg-blue-600 btn-xs text-white"
             onClick={() => classFeedback(classItem._id)}
-            disabled={classItem?.status === "pending"}
+            disabled={classItem?.status !== "denied"}
           >
             Feedback
           </button>
