@@ -45,7 +45,7 @@ const ClassRow = ({
         <div className="flex flex-col space-y-2 justify-center">
           <button
             className="btn btn-outline btn-xs text-green-600 hover:bg-green-600 hover:border-0"
-            onClick={() => approveClass(classItem?._id)}
+            onClick={() => approveClass(classItem)}
             disabled={
               classItem?.status === "denied" || classItem?.status === "approve"
             }

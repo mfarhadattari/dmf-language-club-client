@@ -28,11 +28,14 @@ const ManageClass = () => {
     },
   });
 
-  const approveClass = (id) => {
+  const approveClass = (classItem) => {
     ConfirmationAlert("Sure Approve?").then((res) => {
       if (res.isConfirmed) {
         secureAxios
-          .patch(`/admin/approve-class/${id}?email=${authUser.email}`)
+          .patch(
+            `/admin/approve-class/${classItem._id}?email=${authUser.email}`,
+            { instructorEmail: classItem.instructorEmail }
+          )
           .then(({ data }) => {
             if (data.modifiedCount > 0) {
               refetchClass();

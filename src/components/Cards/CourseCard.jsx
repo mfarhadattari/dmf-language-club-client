@@ -1,17 +1,13 @@
 import { FaChalkboardTeacher } from "react-icons/fa";
 import PrimaryBtn from "../Button/PrimaryBtn";
 
-// TODO: Add Image
 // TODO: Only Student can select other select btn disabled
-
-const img =
-  "https://img.freepik.com/free-vector/font-design-read-book-with-kid-reading-book_1308-81788.jpg?w=740&t=st=1686218355~exp=1686218955~hmac=6dc1d6b9a778b78e087767d30aecddaf977bec7c288d8bc5ebe44233e7d7e062";
 
 const CourseCard = ({ item }) => {
   return (
     <div className="card shadow-2xl">
       <figure>
-        <img src={img} alt={item.name} />
+        <img src={item.image} alt={item.name} className="w-full h-[300px]" />
       </figure>
       <div
         className={`card-body rounded-b-xl ${

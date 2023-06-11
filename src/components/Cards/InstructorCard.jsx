@@ -17,9 +17,10 @@ const InstructorCard = ({ instructor }) => {
           {instructor.email}
         </p>
         <p className="text-lg">
-          {instructor?.totalClass
-            ? `Total Class:${instructor.totalClass} `
-            : ""}
+        Total Class: {instructor.totalClass || 0} 
+        </p>
+        <p className="text-lg">
+        Total Student: {instructor.totalStudent || 0} 
         </p>
         <div className="card-actions">
           <SecondaryBtn>See Classes</SecondaryBtn>
