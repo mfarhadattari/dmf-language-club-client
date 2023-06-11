@@ -6,29 +6,32 @@ import ConfirmationAlert from "../Message/ConfirmationAlert";
 import { useLocation, useNavigate } from "react-router-dom";
 import useSecureAxios from "../../hooks/useSecureAxios";
 import SuccessAlert from "../Message/SuccessAlert";
-import { useEffect, useState } from "react";
-
-// TODO: Only Student can select other select btn disabled
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const CourseCard = ({ item }) => {
   const { userRole } = useUserRole();
-  const { authUser } = useAuthContext();
+  const { authUser, authLoading } = useAuthContext();
   const { secureAxios } = useSecureAxios();
 
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState("selected");
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (authUser) {
-      secureAxios
-        .get(`/student/check-class/${item._id}?email=${authUser.email}`)
-        .then(({ data }) => {
-          setStatus(data.status);
-        });
-    }
-  }, [authUser, item, secureAxios]);
+  const { data: status = null, refetch } = useQuery({
+    queryKey: ["status", authUser, item, secureAxios],
+    queryFn: async () => {
+      if (authUser) {
+        const res = await secureAxios.get(
+          `/student/check-class/${item._id}?email=${authUser?.email}`
+        );
+        return res.data.status;
+      } else {
+        return null;
+      }
+    },
+    enabled: !authLoading,
+  });
 
   // !------------------- Select Class ----------------! //
   const selectClass = (classItem) => {
@@ -54,6 +57,7 @@ const CourseCard = ({ item }) => {
         .then(({ data }) => {
           if (data.insertedId) {
             SuccessAlert("Successfully Selected!");
+            refetch();
             setLoading(false);
           }
         });

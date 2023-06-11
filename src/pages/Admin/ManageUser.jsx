@@ -7,13 +7,12 @@ import { useQuery } from "@tanstack/react-query";
 import ConfirmationAlert from "./../../components/Message/ConfirmationAlert";
 import SuccessAlert from "./../../components/Message/SuccessAlert";
 
-
 // TODO: Searching System
 // TODO: Filtering System
 // TODO: Pagination
 
 const ManageUser = () => {
-  const { authUser } = useAuthContext();
+  const { authUser, authLoading } = useAuthContext();
   const { secureAxios } = useSecureAxios();
 
   // !---------------------- Get User -------------------! //
@@ -22,11 +21,12 @@ const ManageUser = () => {
     isLoading,
     refetch: refetchUsers,
   } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["users", secureAxios, authUser],
     queryFn: async () => {
       const res = await secureAxios.get(`/admin/users?email=${authUser.email}`);
       return res.data;
     },
+    enabled: !authLoading,
   });
 
   // !---------------------- Make Admin -------------------! //

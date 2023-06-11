@@ -14,7 +14,7 @@ import Feedback from "../../components/Message/Feedback";
 // TODO: Pagination
 
 const ManageClass = () => {
-  const { authUser } = useAuthContext();
+  const { authUser, authLoading } = useAuthContext();
   const { secureAxios } = useSecureAxios();
 
   // ! ------------------ GET DATA -------------------! //
@@ -23,13 +23,14 @@ const ManageClass = () => {
     refetch: refetchClass,
     data: classes = [],
   } = useQuery({
-    queryKey: ["classes", authUser?.email],
+    queryKey: ["classes", authUser , secureAxios],
     queryFn: async () => {
       const res = await secureAxios.get(
         `/admin/classes?email=${authUser.email}`
       );
       return res.data;
     },
+    enabled: !authLoading,
   });
 
   // ! ------------------- Approve Class ----------------! //

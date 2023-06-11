@@ -7,7 +7,7 @@ import CartItem from "../../components/TableRow/CartItem";
 
 const SelectedClass = () => {
   const { secureAxios } = useSecureAxios();
-  const { authUser } = useAuthContext();
+  const { authUser, authLoading } = useAuthContext();
 
   const { data: carts = [], isLoading } = useQuery({
     queryKey: ["carts", secureAxios, authUser],
@@ -17,6 +17,7 @@ const SelectedClass = () => {
       );
       return res.data;
     },
+    enabled: !authLoading,
   });
   return (
     <main>
