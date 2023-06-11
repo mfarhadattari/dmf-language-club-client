@@ -10,7 +10,6 @@ import { useState } from "react";
 import LoadingBtn from "../../components/Button/LoadingBtn";
 
 const AddClass = () => {
-  // TODO: Add a class Functionality
   const { authUser } = useAuthContext();
   const { secureAxios } = useSecureAxios();
   const [loading, setLoading] = useState(false);
@@ -21,6 +20,7 @@ const AddClass = () => {
     formState: { errors },
   } = useForm();
 
+  // ! ----------------------- ADD A Class -----------------! //
   const addClass = (data, event) => {
     setLoading(true);
     const formData = new FormData();

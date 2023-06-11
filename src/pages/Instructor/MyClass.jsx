@@ -5,6 +5,9 @@ import useSecureAxios from "../../hooks/useSecureAxios";
 import Loaders from "../../components/Loaders";
 import InstructorClassRow from "../../components/TableRow/InstructorClassRow";
 
+// TODO: Searching System
+// TODO: Filtering System
+// TODO: Pagination
 const MyClass = () => {
   const { authUser } = useAuthContext();
   const { secureAxios } = useSecureAxios();

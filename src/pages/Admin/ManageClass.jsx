@@ -9,11 +9,15 @@ import ConfirmationAlert from "./../../components/Message/ConfirmationAlert";
 import SuccessAlert from "./../../components/Message/SuccessAlert";
 import Feedback from "../../components/Message/Feedback";
 
+// TODO: Searching System
+// TODO: Filtering System
+// TODO: Pagination
+
 const ManageClass = () => {
   const { authUser } = useAuthContext();
   const { secureAxios } = useSecureAxios();
 
-  // TODO: class action functionality
+  // ! ------------------ GET DATA -------------------! //
   const {
     isLoading,
     refetch: refetchClass,
@@ -28,6 +32,7 @@ const ManageClass = () => {
     },
   });
 
+  // ! ------------------- Approve Class ----------------! //
   const approveClass = (classItem) => {
     ConfirmationAlert("Sure Approve?").then((res) => {
       if (res.isConfirmed) {
@@ -46,6 +51,7 @@ const ManageClass = () => {
     });
   };
 
+  // ! ------------------- Denied Class ----------------! //
   const deniedClass = (id) => {
     ConfirmationAlert("Sure Denied?").then((res) => {
       if (res.isConfirmed) {
@@ -60,6 +66,8 @@ const ManageClass = () => {
       }
     });
   };
+
+  // ! -------------------Send Feedback ----------------! //
   const classFeedback = (id) => {
     Feedback().then((result) => {
       if (result.isConfirmed) {

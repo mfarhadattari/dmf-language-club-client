@@ -3,7 +3,7 @@ import SecondaryBtn from "../Button/SecondaryBtn";
 const InstructorCard = ({ instructor }) => {
   return (
     <div className="card shadow-2xl">
-      <figure className="px-10 py-10">
+      <figure className="px-10">
         <img
           src={instructor.photoURL}
           alt={instructor.displayName}
@@ -12,17 +12,12 @@ const InstructorCard = ({ instructor }) => {
       </figure>
       <div className="card-body items-center">
         <h2 className="card-title">{instructor.displayName}</h2>
-
-        <p className="text-lg">
-          {instructor.email}
-        </p>
-        <p className="text-lg">
-        Total Class: {instructor.totalClass || 0} 
-        </p>
-        <p className="text-lg">
-        Total Student: {instructor.totalStudent || 0} 
-        </p>
-        <div className="card-actions">
+        <p className="text-lg">{instructor.email}</p>
+        <div className="flex gap-5">
+          <p>Total Class: {instructor.totalClass || 0}</p>
+          <p>Total Student: {instructor.totalStudent || 0}</p>
+        </div>
+        <div className="card-actions w-full">
           <SecondaryBtn>See Classes</SecondaryBtn>
         </div>
       </div>
