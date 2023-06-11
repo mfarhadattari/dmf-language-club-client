@@ -18,7 +18,7 @@ const UserRow = ({ user, index, makeAdmin }) => {
         <div className="flex flex-col space-y-3">
           <button
             className="btn btn-outline text-green-600 px-0 hover:bg-green-600 hover:border-0"
-            disabled={user?.role === "instructor" || user?.role === "admin"}
+            disabled={user?.role === "instructor"}
           >
             Make Instructor
           </button>
