@@ -16,7 +16,7 @@ const CourseCard = ({ item }) => {
   const { secureAxios } = useSecureAxios();
 
   const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState("selected");
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -30,6 +30,7 @@ const CourseCard = ({ item }) => {
     }
   }, [authUser, item, secureAxios]);
 
+  // !------------------- Select Class ----------------! //
   const selectClass = (classItem) => {
     if (!authUser) {
       ConfirmationAlert("Please login first!").then((res) => {
@@ -37,25 +38,26 @@ const CourseCard = ({ item }) => {
           navigate("/login", { replace: true, state: { from: location } });
         }
       });
+    } else {
+      setLoading(true);
+      const cart = {
+        displayName: authUser.displayName,
+        email: authUser.email,
+        classId: classItem._id,
+        name: classItem.name,
+        instructorName: classItem.instructorName,
+        image: classItem.image,
+        price: classItem.price,
+      };
+      secureAxios
+        .post(`student/add-to-cart?email=${authUser.email}`, cart)
+        .then(({ data }) => {
+          if (data.insertedId) {
+            SuccessAlert("Successfully Selected!");
+            setLoading(false);
+          }
+        });
     }
-    setLoading(true);
-    const cart = {
-      displayName: authUser.displayName,
-      email: authUser.email,
-      classId: classItem._id,
-      name: classItem.name,
-      instructorName: classItem.instructorName,
-      image: classItem.image,
-      price: classItem.price,
-    };
-    secureAxios
-      .post(`student/add-to-cart?email=${authUser.email}`, cart)
-      .then(({ data }) => {
-        if (data.insertedId) {
-          SuccessAlert("Successfully Selected!");
-          setLoading(false);
-        }
-      });
   };
 
   return (

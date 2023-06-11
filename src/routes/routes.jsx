@@ -14,6 +14,7 @@ import ManageClass from "../pages/Admin/ManageClass";
 import AddClass from "../pages/Instructor/AddClass";
 import InstructorRoute from "./InstructorRoute";
 import MyClass from "../pages/Instructor/MyClass";
+import SelectedClass from "../pages/Student/SelectedClass";
 
 const routers = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const routers = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+        path: "selected-class",
+        element: <SelectedClass></SelectedClass>,
+      },
       {
         path: "add-class",
         element: (

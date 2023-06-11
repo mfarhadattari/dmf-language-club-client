@@ -9,7 +9,7 @@ const PrimaryBtn = ({ onClick, children, disabled, loading }) => {
         color="white"
         visible={true}
         ariaLabel="oval-loading"
-        secondaryColor="white"
+        secondaryColor="blue"
         strokeWidth={10}
         strokeWidthSecondary={10}
       />
