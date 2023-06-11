@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const CartItem = ({ index, cartItem, deleteFromCart }) => {
   return (
     <tr>
@@ -23,9 +25,12 @@ const CartItem = ({ index, cartItem, deleteFromCart }) => {
           >
             Delete
           </button>
-          <button className="btn btn-outline text-green-600 border-2 hover:bg-green-600 hover:border-0 w-full">
+          <Link
+            to={`/dashboard/payment/${cartItem._id}`}
+            className="btn btn-outline text-green-600 border-2 hover:bg-green-600 hover:border-0 w-full"
+          >
             Pay
-          </button>
+          </Link>
         </div>
       </td>
     </tr>
