@@ -1,24 +1,46 @@
-import { useEffect } from "react";
 import SetTitle from "../../components/setTitle";
 import useAuthContext from "./../../hooks/useAuthContext";
 import useSecureAxios from "./../../hooks/useSecureAxios";
-import { useState } from "react";
 import Loaders from "./../../components/Loaders";
 import UserRow from "../../components/TableRow/UserRow";
+import { useQuery } from "@tanstack/react-query";
+import ConfirmationAlert from "./../../components/Message/ConfirmationAlert";
+import SuccessAlert from "./../../components/Message/SuccessAlert";
 
 const ManageUser = () => {
   const { authUser } = useAuthContext();
   const { secureAxios } = useSecureAxios();
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   // TODO: User role update functionality
-  useEffect(() => {
-    secureAxios.get(`/admin/users?email=${authUser.email}`).then(({ data }) => {
-      setUsers(data);
-      setLoading(false);
+
+  const {
+    data: users = [],
+    isLoading,
+    refetch: refetchUsers,
+  } = useQuery({
+    queryKey: [""],
+    queryFn: async () => {
+      const res = await secureAxios.get(`/admin/users?email=${authUser.email}`);
+      return res.data;
+    },
+  });
+
+  const makeAdmin = (user) => {
+    ConfirmationAlert("Want to make Admin?").then((res) => {
+      if (res.isConfirmed) {
+        secureAxios
+          .patch(`/admin/make-admin?email=${authUser.email}`, {
+            email: user.email,
+          })
+          .then(({ data }) => {
+            if (data.modifiedCount > 0) {
+              SuccessAlert(`${user.displayName} is now Admin`);
+              refetchUsers();
+            }
+          });
+      }
     });
-  }, [secureAxios, authUser]);
+  };
 
   return (
     <main>
@@ -26,7 +48,7 @@ const ManageUser = () => {
       <div className="p-5">
         <h1 className="text-center text-3xl font-bold">Manage User</h1>
       </div>
-      {loading ? (
+      {isLoading ? (
         <Loaders></Loaders>
       ) : (
         <section>
@@ -43,7 +65,12 @@ const ManageUser = () => {
               </thead>
               <tbody>
                 {users.map((user, index) => (
-                  <UserRow key={user._id} user={user} index={index}></UserRow>
+                  <UserRow
+                    key={user._id}
+                    user={user}
+                    index={index}
+                    makeAdmin={makeAdmin}
+                  ></UserRow>
                 ))}
               </tbody>
             </table>
