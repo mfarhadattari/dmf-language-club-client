@@ -3,13 +3,17 @@ import PrimaryBtn from "../Button/PrimaryBtn";
 import useUserRole from "../../hooks/useUserRole";
 import useAuthContext from "../../hooks/useAuthContext";
 import ConfirmationAlert from "../Message/ConfirmationAlert";
-import {useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import useSecureAxios from "../../hooks/useSecureAxios";
+import SuccessAlert from "../Message/SuccessAlert";
 
 // TODO: Only Student can select other select btn disabled
 
 const CourseCard = ({ item }) => {
   const { userRole } = useUserRole();
   const { authUser } = useAuthContext();
+  const { secureAxios } = useSecureAxios();
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -21,7 +25,7 @@ const CourseCard = ({ item }) => {
         }
       });
     }
-    const selectedInfo = {
+    const cart = {
       displayName: authUser.displayName,
       email: authUser.email,
       classId: classItem._id,
@@ -30,7 +34,13 @@ const CourseCard = ({ item }) => {
       image: classItem.image,
       price: classItem.price,
     };
-    console.log(selectedInfo);
+    secureAxios
+      .post(`student/add-to-cart?email=${authUser.email}`, cart)
+      .then(({ data }) => {
+        if (data.insertedId) {
+          SuccessAlert("Successfully Selected!");
+        }
+      });
   };
 
   return (
