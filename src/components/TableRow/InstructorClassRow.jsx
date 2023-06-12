@@ -30,7 +30,7 @@ const InstructorClassRow = ({ classItem, index }) => {
       <td className="text-base font-semibold">
         <div className="w-fit mx-auto">
           <p>Seat: {classItem?.availableSeats}</p>
-          <p>Enrolled: {classItem?.enrolledStudent}</p>
+          <p>Enrolled: {classItem?.enrolledStudents || 0}</p>
         </div>
       </td>
       <td>
