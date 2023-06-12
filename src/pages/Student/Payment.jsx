@@ -12,13 +12,13 @@ const Payment = () => {
   const { id } = useParams();
   const { authUser } = useAuthContext();
   const { secureAxios } = useSecureAxios();
-  const [info, setInfo] = useState({});
+  const [item, setItem] = useState({});
 
   useEffect(() => {
     secureAxios
       .get(`/student/cart-item-info/${id}?email=${authUser.email}`)
       .then(({ data }) => {
-        setInfo(data);
+        setItem(data);
       });
   }, [secureAxios, authUser, id]);
 
@@ -30,10 +30,7 @@ const Payment = () => {
       </div>
       <div className="w-3/4 mx-auto">
         <Elements stripe={stripePromise}>
-          <StripePaymentForm
-            price={info?.price}
-            cartId={id}
-          ></StripePaymentForm>
+          <StripePaymentForm item={item}></StripePaymentForm>
         </Elements>
       </div>
     </main>

@@ -6,8 +6,9 @@ import useAuthContext from "../../hooks/useAuthContext";
 import ErrorMessage from "./../Message/ErrorMessage";
 import ConfirmationAlert from "./../Message/ConfirmationAlert";
 import SuccessAlert from "./../Message/SuccessAlert";
+import moment from "moment/moment";
 
-const StripePaymentForm = ({ price }) => {
+const StripePaymentForm = ({ item }) => {
   const stripe = useStripe();
   const element = useElements();
 
@@ -19,16 +20,16 @@ const StripePaymentForm = ({ price }) => {
   const { authUser } = useAuthContext();
 
   useEffect(() => {
-    if (price > 0) {
+    if (item.price > 0) {
       secureAxios
         .post(`/student/create-payment-intent?email=${authUser.email}`, {
-          price,
+          price: item.price,
         })
         .then(({ data }) => {
           setClientSecret(data.clientSecret);
         });
     }
-  }, [price, secureAxios, authUser]);
+  }, [item, secureAxios, authUser]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -38,7 +39,7 @@ const StripePaymentForm = ({ price }) => {
       !element ||
       !clientSecret ||
       paymentProcessing ||
-      price < 1
+      item.price < 1
     ) {
       return;
     }
@@ -60,7 +61,7 @@ const StripePaymentForm = ({ price }) => {
 
     setPaymentError("");
     setPaymentProcessing(true);
-    ConfirmationAlert(`Sure to payment ${price}?`).then((res) => {
+    ConfirmationAlert(`Sure to payment ${item.price}?`).then((res) => {
       if (res.isConfirmed) {
         stripe
           .confirmCardPayment(clientSecret, {
@@ -75,7 +76,29 @@ const StripePaymentForm = ({ price }) => {
           .then((res) => {
             if (res?.paymentIntent?.status === "succeeded") {
               // TODO: REMOVE FROM CART AND SAVE IN ENROLLED
-              SuccessAlert("Payment Successfully Complete");
+              const orderInfo = {
+                name: authUser.displayName,
+                email: authUser.email,
+                transitionId: res.paymentIntent.id,
+                amount: item.price,
+                paymentTime: moment().format("MMMM DD YYYY , HH:mm:ss"),
+                classId: item.classId,
+                className: item.name,
+                image: item.image,
+                instructorName: item.instructorName,
+                cartId: item._id,
+              };
+              secureAxios
+                .post(
+                  `/student/order-confirm?email=${authUser.email}`,
+                  orderInfo
+                )
+                .then(({ data }) => {
+                  if (data.insertedId) {
+                    SuccessAlert("Payment Successfully Complete");
+                    event.target.reset();
+                  }
+                });
             }
           });
       } else {
@@ -84,32 +107,46 @@ const StripePaymentForm = ({ price }) => {
     });
   };
   return (
-    <form onSubmit={handleSubmit} className="w-3/4 mx-auto">
-      <CardElement
-        options={{
-          style: {
-            base: {
-              fontSize: "16px",
-              color: "#424770",
-              "::placeholder": {
-                color: "#aab7c4",
+    <div className="w-3/4 mx-auto">
+      {item && (
+        <div className="my-10 flex gap-5">
+          <img src={item.image} className="w-40 h-28 rounded-md" />
+          <div>
+            <h1 className="text-2xl">{item.name}</h1>
+            <h3 className="text-lg font-semibold">Price: ${item.price}</h3>
+          </div>
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit}>
+        <CardElement
+          options={{
+            style: {
+              base: {
+                fontSize: "16px",
+                color: "#424770",
+                "::placeholder": {
+                  color: "#aab7c4",
+                },
+              },
+              invalid: {
+                color: "#9e2146",
               },
             },
-            invalid: {
-              color: "#9e2146",
-            },
-          },
-        }}
-      />
-      {paymentError && <ErrorMessage message={paymentError}></ErrorMessage>}
+          }}
+        />
+        {paymentError && <ErrorMessage message={paymentError}></ErrorMessage>}
 
-      <SecondaryBtn
-        type="submit"
-        disabled={!stripe || !element || !clientSecret || paymentProcessing}
-      >
-        Pay
-      </SecondaryBtn>
-    </form>
+        <div className="mt-5">
+          <SecondaryBtn
+            type="submit"
+            disabled={!stripe || !element || !clientSecret || paymentProcessing}
+          >
+            Pay {item && item?.price}
+          </SecondaryBtn>
+        </div>
+      </form>
+    </div>
   );
 };
 
