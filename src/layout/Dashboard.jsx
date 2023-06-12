@@ -10,7 +10,7 @@ const Dashboard = () => {
 
   const studentOptions = (
     <>
-      <NavigationLink to="student-profile">Profile</NavigationLink>
+      <NavigationLink to="student-home">Student Home</NavigationLink>
       <NavigationLink to="selected-class">Selected Class</NavigationLink>
       <NavigationLink to="enrolled-class">Enrolled Class</NavigationLink>
       <NavigationLink to="payment-history">Payment History</NavigationLink>
@@ -19,7 +19,7 @@ const Dashboard = () => {
 
   const instructorOptions = (
     <>
-      <NavigationLink to="instructor-profile">Profile</NavigationLink>
+      <NavigationLink to="instructor-home">Instructor Home</NavigationLink>
       <NavigationLink to="add-class">Add Class</NavigationLink>
       <NavigationLink to="my-class">My Class</NavigationLink>
     </>
@@ -27,7 +27,7 @@ const Dashboard = () => {
 
   const adminOptions = (
     <>
-      <NavigationLink to="admin-profile">Profile</NavigationLink>
+      <NavigationLink to="admin-home">Admin Home</NavigationLink>
       <NavigationLink to="manage-class">Manage Class</NavigationLink>
       <NavigationLink to="manage-user">Manage User</NavigationLink>
     </>

@@ -19,6 +19,9 @@ import Payment from "../pages/Student/Payment";
 import EnrolledClasses from "../pages/Student/EnrolledClasses";
 import PaymentHistory from "../pages/Student/PaymentHistory";
 import StudentRoute from "./StudentRoute";
+import StudentHome from "./../pages/Student/StudentHome";
+import InstructorHome from "./../pages/Instructor/InstructorHome";
+import AdminHome from "./../pages/Admin/AdminHome";
 
 const routers = createBrowserRouter([
   {
@@ -55,6 +58,15 @@ const routers = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // ! Student Route
+      {
+        path: "student-home",
+        element: (
+          <StudentRoute>
+            <StudentHome></StudentHome>
+          </StudentRoute>
+        ),
+      },
       {
         path: "selected-class",
         element: (
@@ -87,6 +99,15 @@ const routers = createBrowserRouter([
           </StudentRoute>
         ),
       },
+      // ! Instructor Route
+      {
+        path: "instructor-home",
+        element: (
+          <InstructorRoute>
+            <InstructorHome></InstructorHome>
+          </InstructorRoute>
+        ),
+      },
       {
         path: "add-class",
         element: (
@@ -101,6 +122,15 @@ const routers = createBrowserRouter([
           <InstructorRoute>
             <MyClass></MyClass>
           </InstructorRoute>
+        ),
+      },
+      // ! Admin Route
+      {
+        path: "admin-home",
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
         ),
       },
       {
