@@ -86,6 +86,7 @@ const StripePaymentForm = ({ item }) => {
                 className: item.name,
                 image: item.image,
                 instructorName: item.instructorName,
+                instructorEmail: item.instructorEmail,
                 cartId: item._id,
               };
               secureAxios
@@ -140,7 +141,9 @@ const StripePaymentForm = ({ item }) => {
         <div className="mt-5">
           <SecondaryBtn
             type="submit"
-            disabled={!stripe || !element || !clientSecret || paymentProcessing}
+            disabled={
+              !stripe || !element || !clientSecret || paymentProcessing || !item
+            }
           >
             Pay {item && item?.price}
           </SecondaryBtn>

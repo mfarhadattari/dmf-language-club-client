@@ -49,6 +49,7 @@ const CourseCard = ({ item }) => {
         classId: classItem._id,
         name: classItem.name,
         instructorName: classItem.instructorName,
+        instructorEmail: classItem.instructorEmail,
         image: classItem.image,
         price: classItem.price,
       };
@@ -96,8 +97,8 @@ const CourseCard = ({ item }) => {
           >
             <span
               className={`${
-                status === "enrolled" ||
-                (status === "selected" && "text-red-600 font-bold")
+                (status === "enrolled" || status === "selected") &&
+                "text-red-600 font-bold"
               }`}
             >
               {status === "enrolled"
