@@ -6,10 +6,11 @@ const useUserRole = () => {
   const { authUser } = useAuthContext();
 
   const [userRole, setUserRole] = useState("student");
-  const [roleLoading, setRoleLoading] = useState(true);
+  const [roleLoading, setRoleLoading] = useState(false);
 
   useEffect(() => {
     if (authUser) {
+      setRoleLoading(true);
       secureAxios.get(`/user-role?email=${authUser.email}`).then(({ data }) => {
         setUserRole(data.role);
         setRoleLoading(false);
