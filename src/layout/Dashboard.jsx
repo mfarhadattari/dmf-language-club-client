@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 import Avatar from "./../components/Avatar";
 
 const Dashboard = () => {
-  const { userRole } = useUserRole();
+  const { userRole, roleLoading } = useUserRole();
 
   const studentOptions = (
     <>
@@ -61,13 +61,15 @@ const Dashboard = () => {
             <Heading></Heading>
             <div className="h-full px-20 py-10">
               <Avatar></Avatar>
-              <ul className="menu ">
-                {userRole == "admin"
-                  ? adminOptions
-                  : userRole == "instructor"
-                  ? instructorOptions
-                  : studentOptions}
-              </ul>
+              {!roleLoading && (
+                <ul className="menu ">
+                  {userRole == "admin"
+                    ? adminOptions
+                    : userRole == "instructor"
+                    ? instructorOptions
+                    : studentOptions}
+                </ul>
+              )}
               <div className="divider after:bg-blue-600 before:bg-blue-600"></div>
               <ul className="menu">{publicOptions}</ul>
             </div>
