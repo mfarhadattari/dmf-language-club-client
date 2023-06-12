@@ -2,7 +2,7 @@ import SecondaryBtn from "../Button/SecondaryBtn";
 
 const InstructorCard = ({ instructor }) => {
   return (
-    <div className="card shadow-2xl">
+    <div className="card shadow-2xl bg-white text-black">
       <figure className="px-10">
         <img
           src={instructor.photoURL}

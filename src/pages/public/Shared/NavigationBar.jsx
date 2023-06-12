@@ -3,6 +3,7 @@ import { FaBars } from "react-icons/fa";
 import NavigationLink from "../../../components/NavigationLink";
 import useAuthContext from "../../../hooks/useAuthContext";
 import Avatar from "../../../components/Avatar";
+import ThemeToggle from "../../../components/Button/ThemeToggle";
 
 const NavigationBar = () => {
   const { authUser } = useAuthContext();
@@ -20,6 +21,7 @@ const NavigationBar = () => {
       ) : (
         <NavigationLink to="/login">Login</NavigationLink>
       )}
+      <ThemeToggle></ThemeToggle>
     </>
   );
   return (

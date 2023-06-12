@@ -66,7 +66,7 @@ const CourseCard = ({ item }) => {
   };
 
   return (
-    <div className="card shadow-2xl">
+    <div className="card shadow-2xl bg-white text-black">
       <figure>
         <img src={item.image} alt={item.name} className="w-full h-[300px]" />
       </figure>

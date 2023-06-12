@@ -4,6 +4,7 @@ import NavigationLink from "../components/NavigationLink";
 import useUserRole from "../hooks/useUserRole";
 import { Outlet } from "react-router-dom";
 import Avatar from "./../components/Avatar";
+import ThemeToggle from "../components/Button/ThemeToggle";
 
 const Dashboard = () => {
   const { userRole, roleLoading } = useUserRole();
@@ -35,6 +36,7 @@ const Dashboard = () => {
 
   const publicOptions = (
     <>
+      <ThemeToggle></ThemeToggle>
       <NavigationLink to="/">Home</NavigationLink>
       <NavigationLink to="/instructors">Instructors</NavigationLink>
       <NavigationLink to="/classes">Classes</NavigationLink>
