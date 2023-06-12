@@ -16,6 +16,7 @@ import InstructorRoute from "./InstructorRoute";
 import MyClass from "../pages/Instructor/MyClass";
 import SelectedClass from "../pages/Student/SelectedClass";
 import Payment from "../pages/Student/Payment";
+import EnrolledClasses from "../pages/Student/EnrolledClasses";
 
 const routers = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const routers = createBrowserRouter([
       {
         path: "selected-class",
         element: <SelectedClass></SelectedClass>,
+      },
+      {
+        path: "enrolled-class",
+        element: <EnrolledClasses></EnrolledClasses>,
       },
       {
         path: "payment/:id",
