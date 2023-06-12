@@ -12,7 +12,7 @@ const InstructorClassRow = ({ classItem, index }) => {
   };
 
   return (
-    <tr>
+    <tr className="shadow-lg">
       <th className="text-xl font-semibold">{index + 1}</th>
       <td>
         <div className="w-28 h-28 border rounded-lg">

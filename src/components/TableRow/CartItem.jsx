@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const CartItem = ({ index, cartItem, deleteFromCart }) => {
   return (
-    <tr>
+    <tr className="hover:shadow-lg">
       <th className="text-xl font-semibold">{index + 1}</th>
       <td>
         <div className="w-28 h-28 border rounded-lg">

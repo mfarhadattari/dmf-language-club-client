@@ -11,7 +11,7 @@ const EnrolledClasses = () => {
       </div>
       <section>
         <div className="overflow-x-auto">
-          <table className="table">
+          <table className="table mb-10">
             <thead>
               <tr className="border-b-4 border-blue-600"></tr>
             </thead>
