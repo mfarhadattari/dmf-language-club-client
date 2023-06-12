@@ -75,7 +75,6 @@ const StripePaymentForm = ({ item }) => {
           })
           .then((res) => {
             if (res?.paymentIntent?.status === "succeeded") {
-              // TODO: REMOVE FROM CART AND SAVE IN ENROLLED
               const orderInfo = {
                 name: authUser.displayName,
                 email: authUser.email,
