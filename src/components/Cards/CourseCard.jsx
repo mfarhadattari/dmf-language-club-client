@@ -10,7 +10,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 
 const CourseCard = ({ item }) => {
-  const { userRole } = useUserRole();
+  const { userRole, roleLoading } = useUserRole();
   const { authUser, authLoading } = useAuthContext();
   const { secureAxios } = useSecureAxios();
 
@@ -88,6 +88,7 @@ const CourseCard = ({ item }) => {
             onClick={() => selectClass(item)}
             disabled={
               item?.availableSeats < 1 ||
+              roleLoading ||
               userRole === "admin" ||
               userRole === "instructor" ||
               status === "enrolled" ||
