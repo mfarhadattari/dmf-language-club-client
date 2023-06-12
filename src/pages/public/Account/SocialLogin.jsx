@@ -39,7 +39,7 @@ const SocialLogin = () => {
       });
   };
   return (
-    <div className="card-body items-center justify-center">
+    <div className="card-body items-center justify-center bg-white text-black rounded-lg">
       <Heading></Heading>
       <h1 className="text-center mt-5 mb-3 text-2xl font-bold ">
         Connect with

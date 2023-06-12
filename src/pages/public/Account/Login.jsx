@@ -47,7 +47,7 @@ const Login = () => {
       <section className="my-10">
         <div className="hero">
           <div className="hero-content flex-col lg:flex-row">
-            <div className="card flex-shrink-0 w-full max-w-sm mx-auto shadow-2xl bg-base-100">
+            <div className="card flex-shrink-0 w-full max-w-sm mx-auto shadow-2xl bg-white text-black">
               <h1 className="text-center mt-5 text-2xl font-bold">
                 Please Login
               </h1>

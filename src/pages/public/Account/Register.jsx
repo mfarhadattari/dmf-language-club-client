@@ -84,7 +84,7 @@ const Register = () => {
       <SetTitle title="Register - DMF Language Club"></SetTitle>
       <section className="my-10">
         <div>
-          <div className="card  w-full max-w-3xl mx-auto shadow-2xl bg-base-100">
+          <div className="card  w-full max-w-3xl mx-auto shadow-2xl bg-white text-black">
             <h1 className="text-center mt-5 text-2xl font-bold">
               Create Account
             </h1>
