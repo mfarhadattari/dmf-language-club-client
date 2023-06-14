@@ -36,7 +36,7 @@ const AddClass = () => {
             instructorName: data.instructorName,
             instructorEmail: data.instructorEmail,
             availableSeats: parseInt(data.availableSeats),
-            enrolledStudent: 0,
+            enrolledStudents: 0,
             price: parseFloat(data.price),
             status: "pending",
           };
