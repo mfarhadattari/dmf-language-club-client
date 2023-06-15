@@ -4,9 +4,11 @@ import NavigationLink from "../../../components/NavigationLink";
 import useAuthContext from "../../../hooks/useAuthContext";
 import Avatar from "../../../components/Avatar";
 import ThemeToggle from "../../../components/Button/ThemeToggle";
+import useUserRole from "./../../../hooks/useUserRole";
 
 const NavigationBar = () => {
   const { authUser } = useAuthContext();
+  const { userRole } = useUserRole();
 
   const navItems = (
     <>
@@ -15,7 +17,17 @@ const NavigationBar = () => {
       <NavigationLink to="/classes">Classes</NavigationLink>
       {authUser ? (
         <>
-          <NavigationLink to="/dashboard">Dashboard</NavigationLink>
+          <NavigationLink
+            to={
+              userRole === "admin"
+                ? "/dashboard/admin-home"
+                : userRole === "instructor"
+                ? "/dashboard/instructor-home"
+                : "/dashboard/student-home"
+            }
+          >
+            Dashboard
+          </NavigationLink>
           <Avatar></Avatar>
         </>
       ) : (
