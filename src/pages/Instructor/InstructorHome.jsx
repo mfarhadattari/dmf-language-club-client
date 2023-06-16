@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAuthContext from "./../../hooks/useAuthContext";
 import useSecureAxios from "./../../hooks/useSecureAxios";
 import Loaders from "../../components/Loaders";
+import SetTitle from "../../components/SetTitle";
 const InstructorHome = () => {
   const { authUser } = useAuthContext();
   const { secureAxios } = useSecureAxios();
@@ -14,9 +15,10 @@ const InstructorHome = () => {
       setLoading(false);
     });
   }, [authUser, secureAxios]);
-  
+
   return (
     <main>
+      <SetTitle title="Dashboard - DMF Language Club"></SetTitle>
       <section>
         <h1 className="text-3xl italic">Welcome {authUser?.displayName}!</h1>
       </section>
