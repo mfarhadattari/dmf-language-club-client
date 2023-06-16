@@ -30,7 +30,7 @@ const PopularInstructor = () => {
         <Loaders></Loaders>
       ) : (
         <div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 p-5">
             {popularInstructors.map((instructor) => (
               <InstructorCard
                 key={instructor._id}
@@ -38,7 +38,7 @@ const PopularInstructor = () => {
               ></InstructorCard>
             ))}
           </div>
-          <div className="w-2/5 mx-auto">
+          <div className="w-3/4 md:w-2/5 mx-auto">
             <Link to="/instructors">
               <PrimaryBtn>See All Instructors</PrimaryBtn>
             </Link>

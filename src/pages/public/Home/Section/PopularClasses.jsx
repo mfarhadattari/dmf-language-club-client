@@ -29,12 +29,12 @@ const PopularClasses = () => {
         <Loaders></Loaders>
       ) : (
         <div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 p-5">
             {popularClasses.map((item) => (
               <CourseCard key={item._id} item={item}></CourseCard>
             ))}
           </div>
-          <div className="w-2/5 mx-auto">
+          <div className="w-3/4 md:w-2/5 mx-auto">
             <Link to="/classes">
               <SecondaryBtn>See All Classes</SecondaryBtn>
             </Link>

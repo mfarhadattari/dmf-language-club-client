@@ -33,7 +33,7 @@ const MyClass = () => {
         <Loaders></Loaders>
       ) : (
         <section>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto w-[350px] md:w-full mx-auto">
             <table className="table mt-10">
               <thead>
                 <tr className="border-b-4 border-blue-600">

@@ -23,7 +23,7 @@ const ManageClass = () => {
     refetch: refetchClass,
     data: classes = [],
   } = useQuery({
-    queryKey: ["classes", authUser , secureAxios],
+    queryKey: ["classes", authUser, secureAxios],
     queryFn: async () => {
       const res = await secureAxios.get(
         `/admin/classes?email=${authUser.email}`
@@ -87,7 +87,7 @@ const ManageClass = () => {
   };
 
   return (
-    <main>
+    <main className="container mx-auto">
       <SetTitle title="Manage Class - DMF Language Club"></SetTitle>
       <div className="p-5">
         <h1 className="text-center text-3xl font-bold">Manage Classes</h1>
@@ -95,31 +95,33 @@ const ManageClass = () => {
       {isLoading ? (
         <Loaders></Loaders>
       ) : (
-        <section>
-          <div className="overflow-x-auto">
-            <table className="table mb-10">
-              <thead>
-                <tr className="border-b-4 border-blue-600">
-                  <th className="text-xl">#</th>
-                  <th className="text-xl">Image and Name</th>
-                  <th className="text-xl">Instructor</th>
-                  <th className="text-xl text-center">Info</th>
-                  <th className="text-xl text-center">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {classes.map((classItem, index) => (
-                  <ClassRow
-                    key={classItem._id}
-                    classItem={classItem}
-                    index={index}
-                    approveClass={approveClass}
-                    deniedClass={deniedClass}
-                    classFeedback={classFeedback}
-                  ></ClassRow>
-                ))}
-              </tbody>
-            </table>
+        <section className="w-full mx-auto">
+          <div>
+            <div className="overflow-x-auto w-[350px] md:w-full mx-auto">
+              <table className="table mb-10">
+                <thead>
+                  <tr className="border-b-4 border-blue-600">
+                    <th className="text-xl">#</th>
+                    <th className="text-xl">Image and Name</th>
+                    <th className="text-xl">Instructor</th>
+                    <th className="text-xl text-center">Info</th>
+                    <th className="text-xl text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {classes.map((classItem, index) => (
+                    <ClassRow
+                      key={classItem._id}
+                      classItem={classItem}
+                      index={index}
+                      approveClass={approveClass}
+                      deniedClass={deniedClass}
+                      classFeedback={classFeedback}
+                    ></ClassRow>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </section>
       )}

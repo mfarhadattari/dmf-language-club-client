@@ -1,16 +1,13 @@
 import { Rating } from "@smastrom/react-rating";
 import '@smastrom/react-rating/style.css'
 
-// TODO: PHOT URL DYNAMIC
-const photoURL = "https://cdn-icons-png.flaticon.com/128/4140/4140048.png";
-
 const ReviewCard = ({ review }) => {
   return (
     <div className="block w-full object-cover h-full bg-white text-black rounded-md pt-5">
-      <div className="card shadow-2xl h-[90%]">
+      <div className="card shadow-2xl h-[95%]">
         <figure>
           <img
-            src={photoURL}
+            src={review.photoURL}
             alt={review.name}
             className="h-[100px] rounded-full"
           />

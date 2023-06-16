@@ -109,7 +109,7 @@ const StripePaymentForm = ({ item }) => {
   return (
     <div className="w-3/4 mx-auto">
       {item && (
-        <div className="my-10 flex gap-5">
+        <div className="my-10 flex flex-col md:flex-row  items-center md:items-start gap-5">
           <img src={item.image} className="w-40 h-28 rounded-md" />
           <div>
             <h1 className="text-2xl">{item.name}</h1>

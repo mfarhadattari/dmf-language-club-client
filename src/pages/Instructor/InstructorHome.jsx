@@ -26,9 +26,9 @@ const InstructorHome = () => {
         <Loaders></Loaders>
       ) : (
         <section>
-          <div className="mt-10 space-y-10 ">
-            <div className="flex gap-10 w-full">
-              <div className="stat border-2 px-10 rounded-lg shadow-lg w-1/2">
+          <div className="mt-10 space-y-5 ">
+            <div className="grid  grid-cols-1 md:grid-cols-2 gap-5 w-full">
+              <div className="stat border-2 px-10 rounded-lg shadow-lg">
                 <div className="stat-figure text-secondary">
                   <div className="avatar">
                     <div className="w-20 rounded-full">
@@ -39,7 +39,7 @@ const InstructorHome = () => {
                 <div className="stat-value text-5xl">{data?.totalClass}</div>
                 <div className="stat-title text-xl">Total Class</div>
               </div>
-              <div className="stat border-2 px-10 rounded-lg shadow-lg w-1/2">
+              <div className="stat border-2 px-10 rounded-lg shadow-lg">
                 <div className="stat-figure text-secondary">
                   <div className="avatar">
                     <div className="w-20 rounded-full">
@@ -51,7 +51,7 @@ const InstructorHome = () => {
                 <div className="stat-title text-xl">Total Student</div>
               </div>
             </div>
-            <div className="flex gap-10 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
               <div className="stat border-2 px-5 rounded-lg shadow-lg">
                 <div className="stat-figure text-secondary">
                   <div className="avatar">
@@ -74,7 +74,7 @@ const InstructorHome = () => {
                 <div className="stat-value text-5xl">{data?.approveClass}</div>
                 <div className="stat-title text-xl">Approve Class</div>
               </div>
-              <div className="stat border-2 px-5 rounded-lg shadow-lg">
+              <div className="stat border-2 px-5 rounded-lg shadow-lg md:col-span-2 xl:col-span-1">
                 <div className="stat-figure text-secondary">
                   <div className="avatar">
                     <div className="w-20 rounded-full">

@@ -12,7 +12,7 @@ const ClassRow = ({
         <div className="flex items-center space-x-3">
           <div className="w-28 h-28 border rounded-lg">
             <img
-              className="w-full h-full"
+              className="w-full h-full rounded-lg"
               src={classItem?.image}
               alt={classItem?.name}
             />

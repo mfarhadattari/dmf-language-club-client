@@ -75,7 +75,7 @@ const ManageUser = () => {
         <Loaders></Loaders>
       ) : (
         <section>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto w-[350px] mx-auto md:w-full">
             <table className="table">
               <thead>
                 <tr className="border-b-4 border-blue-600">

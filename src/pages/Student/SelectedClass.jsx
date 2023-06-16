@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import SetTitle from "../../components/setTitle";
 import useSecureAxios from "../../hooks/useSecureAxios";
 import Loaders from "../../components/Loaders";
 import useAuthContext from "../../hooks/useAuthContext";
 import CartItem from "../../components/TableRow/CartItem";
 import ConfirmationAlert from "./../../components/Message/ConfirmationAlert";
 import SuccessAlert from "./../../components/Message/SuccessAlert";
+import SetTitle from './../../components/SetTitle';
 
 const SelectedClass = () => {
   const { secureAxios } = useSecureAxios();
@@ -53,7 +53,7 @@ const SelectedClass = () => {
         <Loaders></Loaders>
       ) : (
         <section>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto w-[350px] md:w-full">
             <table className="table mb-10">
               <thead>
                 <tr className="border-b-4 border-blue-600">

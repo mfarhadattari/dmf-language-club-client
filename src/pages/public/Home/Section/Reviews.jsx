@@ -50,10 +50,10 @@ const Reviews = () => {
             clickable: true,
           }}
           modules={[Pagination]}
-          className="w-full h-[400px]"
+          className="w-full h-[450px]"
         >
           {reviews.map((review) => (
-            <SwiperSlide key={review._id} className="w-4/6 h-full">
+            <SwiperSlide key={review._id} className="w-4/6 h-full p-5">
               <ReviewCard review={review}></ReviewCard>
             </SwiperSlide>
           ))}

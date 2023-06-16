@@ -4,10 +4,10 @@ const OrderItem = ({ orderItem }) => {
   return (
     <tr className="shadow-lg">
       <td>
-        <div className="flex items-center gap-5">
+        <div className="flex flex-col md:flex-row items-center gap-5">
           <div className="avatar">
             <div className="mask w-56 h-40">
-              <img src={orderItem?.image} alt={orderItem?.className} />
+              <img src={orderItem?.image} alt={orderItem?.className} className="rounded-lg" />
             </div>
           </div>
           <div className="h-full">

@@ -19,14 +19,14 @@ const UserRow = ({ user, index, makeAdmin, makeInstructor }) => {
       <th>
         <div className="flex flex-col space-y-3">
           <button
-            className="btn btn-outline text-green-600 px-0 hover:bg-green-600 hover:border-0"
+            className="btn btn-outline text-green-600 px-2 hover:bg-green-600 hover:border-0"
             disabled={user?.role === "instructor"}
             onClick={() => makeInstructor(user)}
           >
             Make Instructor
           </button>
           <button
-            className="btn btn-outline text-red-600 px-0 hover:bg-red-600 hover:border-0"
+            className="btn btn-outline text-red-600 px-2 hover:bg-red-600 hover:border-0"
             disabled={user?.role === "admin"}
             onClick={() => makeAdmin(user)}
           >

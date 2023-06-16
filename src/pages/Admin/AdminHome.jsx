@@ -17,7 +17,7 @@ const AdminHome = () => {
   }, [authUser, secureAxios]);
 
   return (
-    <main>
+    <main className="container mx-auto">
       <SetTitle title="Dashboard - DMF Language Club"></SetTitle>
       <section>
         <h1 className="text-3xl italic">Welcome {authUser?.displayName}!</h1>
@@ -26,8 +26,8 @@ const AdminHome = () => {
         <Loaders></Loaders>
       ) : (
         <section>
-          <div className="mt-10 space-y-10 ">
-            <div className="flex gap-10 w-full">
+          <div className="mt-10 space-y-5">
+            <div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto w-full">
               <div className="stat border-2 px-5 rounded-lg shadow-lg">
                 <div className="stat-figure text-secondary">
                   <div className="avatar">
@@ -50,7 +50,7 @@ const AdminHome = () => {
                 <div className="stat-value text-5xl">{data?.approveClass}</div>
                 <div className="stat-title text-xl">Approve Class</div>
               </div>
-              <div className="stat border-2 px-5 rounded-lg shadow-lg">
+              <div className="stat border-2 px-5 rounded-lg shadow-lg md:col-span-2 lg:col-span-1">
                 <div className="stat-figure text-secondary">
                   <div className="avatar">
                     <div className="w-20 rounded-full">
@@ -62,8 +62,8 @@ const AdminHome = () => {
                 <div className="stat-title text-xl">Denied Class</div>
               </div>
             </div>
-            <div className="flex gap-10 w-full">
-              <div className="stat border-2 px-10 rounded-lg shadow-lg w-1/2">
+            <div className="grid grid-col-1 md:grid-cols-2 gap-5 w-full">
+              <div className="stat border-2 px-10 rounded-lg shadow-lg">
                 <div className="stat-figure text-secondary">
                   <div className="avatar">
                     <div className="w-20 rounded-full">
@@ -76,7 +76,7 @@ const AdminHome = () => {
                 </div>
                 <div className="stat-title text-xl">Total Instructor</div>
               </div>
-              <div className="stat border-2 px-10 rounded-lg shadow-lg w-1/2">
+              <div className="stat border-2 px-10 rounded-lg shadow-lg">
                 <div className="stat-figure text-secondary">
                   <div className="avatar">
                     <div className="w-20 rounded-full">
@@ -88,8 +88,8 @@ const AdminHome = () => {
                 <div className="stat-title text-xl">Total Student</div>
               </div>
             </div>
-            <div className="flex gap-10 w-full">
-              <div className="stat border-2 px-10 rounded-lg shadow-lg w-1/2">
+            <div className="grid grid-col-1 md:grid-cols-2 gap-5 w-full">
+              <div className="stat border-2 px-10 rounded-lg shadow-lg ">
                 <div className="stat-figure text-secondary">
                   <div className="avatar">
                     <div className="w-20 rounded-full">
@@ -100,7 +100,7 @@ const AdminHome = () => {
                 <div className="stat-value text-5xl">{data?.totalCarts}</div>
                 <div className="stat-title text-xl">Selected</div>
               </div>
-              <div className="stat border-2 px-10 rounded-lg shadow-lg w-1/2">
+              <div className="stat border-2 px-10 rounded-lg shadow-lg">
                 <div className="stat-figure text-secondary">
                   <div className="avatar">
                     <div className="w-20 rounded-full">

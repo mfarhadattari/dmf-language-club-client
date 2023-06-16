@@ -1,9 +1,10 @@
 import SecondaryBtn from "../Button/SecondaryBtn";
 
 const InstructorCard = ({ instructor }) => {
+  // TODO: SEE Classes Page
   return (
     <div className="card shadow-2xl bg-white text-black">
-      <figure className="px-10">
+      <figure className="px-10 p-5">
         <img
           src={instructor.photoURL}
           alt={instructor.displayName}
