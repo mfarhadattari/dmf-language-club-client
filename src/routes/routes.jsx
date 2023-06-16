@@ -22,6 +22,7 @@ import StudentRoute from "./StudentRoute";
 import StudentHome from "./../pages/Student/StudentHome";
 import InstructorHome from "./../pages/Instructor/InstructorHome";
 import AdminHome from "./../pages/Admin/AdminHome";
+import Profile from "../pages/public/Account/Profile";
 
 const routers = createBrowserRouter([
   {
@@ -47,6 +48,14 @@ const routers = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
       },
     ],
   },

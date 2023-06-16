@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useAuthContext from "../hooks/useAuthContext";
 import ConfirmationAlert from "./Message/ConfirmationAlert";
 import FirebaseErrorAlert from "./Message/FirebaseErrorAlert";
@@ -25,19 +26,21 @@ const Avatar = () => {
       <button className="btn btn-sm" onClick={handelLogOut}>
         Logout
       </button>
-      <div className="avatar">
-        <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-          {
-            <img
-              src={
-                authUser?.photoURL
-                  ? authUser.photoURL
-                  : "https://cdn-icons-png.flaticon.com/128/149/149071.png"
-              }
-            />
-          }
+      <Link to="/profile">
+        <div className="avatar">
+          <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+            {
+              <img
+                src={
+                  authUser?.photoURL
+                    ? authUser.photoURL
+                    : "https://cdn-icons-png.flaticon.com/128/149/149071.png"
+                }
+              />
+            }
+          </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };
