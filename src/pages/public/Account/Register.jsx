@@ -13,6 +13,7 @@ import SetTitle from "../../../components/setTitle";
 import SecondaryBtn from "../../../components/Button/SecondaryBtn";
 
 const Register = () => {
+  // TODO: Google Captcha
   const [loading, setLoading] = useState(false);
   const [passwordShow, setPasswordShow] = useState(false);
   const [passwordMatched, setPasswordMatched] = useState(null);
