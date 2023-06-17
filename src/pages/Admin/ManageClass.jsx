@@ -8,14 +8,26 @@ import SetTitle from "../../components/setTitle";
 import ConfirmationAlert from "./../../components/Message/ConfirmationAlert";
 import SuccessAlert from "./../../components/Message/SuccessAlert";
 import Feedback from "../../components/Message/Feedback";
+import Pagination from "../../components/Pagination";
+import { useEffect, useState } from "react";
 
 // TODO: Searching System
 // TODO: Filtering System
-// TODO: Pagination
 
 const ManageClass = () => {
   const { authUser, authLoading } = useAuthContext();
   const { secureAxios } = useSecureAxios();
+  const [totalItem, setTotalItem] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPage = Math.ceil(totalItem / 10) || 0;
+
+  useEffect(() => {
+    secureAxios
+      .get(`/admin/total-classes?email=${authUser?.email}`)
+      .then(({ data }) => {
+        setTotalItem(data.totalClasses);
+      });
+  }, [authUser, secureAxios]);
 
   // ! ------------------ GET DATA -------------------! //
   const {
@@ -23,10 +35,10 @@ const ManageClass = () => {
     refetch: refetchClass,
     data: classes = [],
   } = useQuery({
-    queryKey: ["classes", authUser, secureAxios],
+    queryKey: ["classes", authUser, secureAxios, currentPage, totalItem],
     queryFn: async () => {
       const res = await secureAxios.get(
-        `/admin/classes?email=${authUser.email}`
+        `/admin/classes?email=${authUser.email}&totalItem=${totalItem}&currentPage=${currentPage}`
       );
       return res.data;
     },
@@ -123,6 +135,11 @@ const ManageClass = () => {
               </table>
             </div>
           </div>
+          <Pagination
+            totalPage={totalPage}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          ></Pagination>
         </section>
       )}
     </main>

@@ -23,7 +23,6 @@ const InstructorClass = () => {
       return req.data;
     },
   });
-  console.log(data);
   return (
     <>
       {isLoading ? (
