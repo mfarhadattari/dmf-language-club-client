@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 const ThemeToggle = () => {
+  // TODO: Color Setting
   const [isDark, setIsDark] = useState(false);
 
   const handelToggle = () => {
