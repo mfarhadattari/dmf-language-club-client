@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import SecondaryBtn from "../Button/SecondaryBtn";
 
 const InstructorCard = ({ instructor }) => {
@@ -18,9 +19,12 @@ const InstructorCard = ({ instructor }) => {
           <p>Total Class: {instructor.totalClass || 0}</p>
           <p>Total Student: {instructor.totalStudent || 0}</p>
         </div>
-        <div className="card-actions w-full">
+        <Link
+          to={`/instructors/${instructor._id}`}
+          className="card-actions w-full"
+        >
           <SecondaryBtn>See Classes</SecondaryBtn>
-        </div>
+        </Link>
       </div>
     </div>
   );
