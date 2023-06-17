@@ -6,14 +6,27 @@ import UserRow from "../../components/TableRow/UserRow";
 import { useQuery } from "@tanstack/react-query";
 import ConfirmationAlert from "./../../components/Message/ConfirmationAlert";
 import SuccessAlert from "./../../components/Message/SuccessAlert";
+import Pagination from "../../components/Pagination";
+import { useEffect, useState } from "react";
 
 // TODO: Searching System
 // TODO: Filtering System
-// TODO: Pagination
 
 const ManageUser = () => {
   const { authUser, authLoading } = useAuthContext();
   const { secureAxios } = useSecureAxios();
+
+  const [totalItem, setTotalItem] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPage = Math.ceil(totalItem / 10) || 0;
+
+  useEffect(() => {
+    secureAxios
+      .get(`/admin/total-users?email=${authUser?.email}`)
+      .then(({ data }) => {
+        setTotalItem(data.totalUsers);
+      });
+  }, [authUser, secureAxios]);
 
   // !---------------------- Get User -------------------! //
   const {
@@ -21,9 +34,11 @@ const ManageUser = () => {
     isLoading,
     refetch: refetchUsers,
   } = useQuery({
-    queryKey: ["users", secureAxios, authUser],
+    queryKey: ["users", secureAxios, authUser, currentPage, totalItem],
     queryFn: async () => {
-      const res = await secureAxios.get(`/admin/users?email=${authUser.email}`);
+      const res = await secureAxios.get(
+        `/admin/users?email=${authUser.email}&totalItem=${totalItem}&currentPage=${currentPage}`
+      );
       return res.data;
     },
     enabled: !authLoading,
@@ -99,6 +114,11 @@ const ManageUser = () => {
               </tbody>
             </table>
           </div>
+          <Pagination
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            totalPage={totalPage}
+          ></Pagination>
         </section>
       )}
     </main>

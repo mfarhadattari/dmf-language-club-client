@@ -1,8 +1,8 @@
 const Pagination = ({ totalPage, currentPage, setCurrentPage }) => {
   const allPages = [...Array(totalPage)].map((_, index) => index + 1);
   return (
-    <div className="flex justify-center items-center">
-      <div className="join">
+    <div className="flex justify-center items-center my-5">
+      <div className="join flex-wrap">
         <button
           className="join-item btn btn-square"
           onClick={() => setCurrentPage(currentPage - 1)}
