@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import SecondaryBtn from "../Button/SecondaryBtn";
 
 const InstructorCard = ({ instructor }) => {
-  // TODO: SEE Classes Page
   return (
     <div className="card shadow-2xl bg-white text-black">
       <figure className="px-10 p-5">
