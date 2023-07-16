@@ -1,11 +1,12 @@
-# DMF LANGUAGE CLUB
+# --------------- | DMF LANGUAGE CLUB | ----------------
+### ------------- An Online Educational Site With Management System -------------
+#
+# URL
+### Live Site: https://dmf-language-club.web.app
+### SERVER: https://dmf-language-club.vercel.app
+### Server Repo: https://github.com/mfarhadattari/dmf-language-club-server
 
-## Live Site: https://dmf-language-club.web.app/
-
-## SERVER: https://dmf-language-club.vercel.app/
-
-## Featured
-
+# Featured
 - Here 3 Role of this website. (Student, Instructor & Admin).
 - Route protected by role.
 - Admin can manage users (make admin , make instructor).
@@ -15,8 +16,7 @@
 - If any class is already select or enrolled user cannot select again.
 - Instructor can seen her class status & feedback(if admin denied)
 
-## Used packages/ technology:
-
+# Used packages/ technology:
 - React (VITE)
 - Express JS
 - Node JS
