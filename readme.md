@@ -6,6 +6,21 @@
 ### SERVER: https://dmf-language-club.vercel.app
 ### Server Repo: https://github.com/mfarhadattari/dmf-language-club-server
 
+# Credential
+
+### Admin Credential:
+- Email: admin@language-club.dmf
+- Password: mfarhad@DMF
+
+### Instructor Credential:
+- Email: instructor@language-club.dmf
+- Password: mfarhad@DMF
+
+### Student Credential:
+- Email: student@language-club.dmf
+- Password: mfarhad@DMF
+
+
 # Featured
 - Here 3 Role of this website. (Student, Instructor & Admin).
 - Route protected by role.
